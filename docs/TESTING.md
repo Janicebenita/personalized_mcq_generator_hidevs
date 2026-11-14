@@ -38,4 +38,4 @@ The sample set is small, English-only, and written by the developer. It is not a
 - The complete synthetic session export is in `docs/demo/browser-session.json`; browser screenshots are in `docs/screenshots/`.
 - The narrated demonstration is 146.88 seconds, H.264/AAC at 1920x1080, and is shared through Google Drive with Viewer access for anyone with the link.
 
-The YouTube demo is published as Unlisted at https://youtu.be/7qaD6AOwUzg on @JaniceBenita-d6x. Its publication was verified in Studio and through an anonymous metadata request. HiDevs submission remains pending explicit user approval.
+The YouTube demo is published as Public at https://youtu.be/7qaD6AOwUzg on @JaniceBenita-d6x. Its publication was verified in Studio and through an anonymous metadata request. HiDevs submission remains pending explicit user approval.

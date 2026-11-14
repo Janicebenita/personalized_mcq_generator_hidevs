@@ -54,7 +54,7 @@ Study notes tell you what to read. A useful practice session should also help yo
 | Open                                                                                                                                      | What you will find                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | 🌍 **[Public live app](https://bloompath-mcq.vercel.app)**                                                                                | A working assessment studio, practice room, and learning dashboard on Vercel |
-| 🎥 **[YouTube walkthrough](https://youtu.be/7qaD6AOwUzg)**                                                                                | A 2:27 Unlisted demonstration on Janice Benita’s channel                     |
+| 🎥 **[YouTube walkthrough](https://youtu.be/7qaD6AOwUzg)**                                                                                | A 2:27 public demonstration on Janice Benita’s channel                       |
 | ☁️ **[Google Drive video](https://drive.google.com/file/d/1GuStRFiFee0ufSnXvgIFJAi9wtPU8myv/view)**                                       | The same demo with view-only access for anyone with the link                 |
 | 📥 **[Download the demo](https://github.com/Janicebenita/personalized_mcq_generator_hidevs/releases/download/v1.0.0/bloompath-demo.mp4)** | H.264/AAC video at 1920 × 1080                                               |
 
@@ -335,6 +335,7 @@ The workflow has two jobs: **quality** runs type checks, formatting, npm audit, 
 
 | Resource                                                      | What it contains                                                          |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| 🎯 [Project fitness review](docs/FITNESS_REVIEW.md)           | Criteria mapping, pre-submission checks, and material limits              |
 | 🧪 [Testing and verification](docs/TESTING.md)                | Check scopes, browser evidence, and known evaluation limits               |
 | 🧠 [Model evaluation](docs/evaluation.json)                   | Raw model stems, acceptance decisions, final questions, and learner paths |
 | 📦 [Model manifest](docs/model-manifest.json)                 | Pinned source revision, asset sizes, and checksums                        |
