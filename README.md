@@ -343,7 +343,7 @@ The workflow has two jobs: **quality** runs type checks, formatting, npm audit, 
 | 🎬 [Demo transcript](docs/demo/transcript.txt)                | Narration and demonstration disclosure                                    |
 | 📤 [Synthetic session export](docs/demo/browser-session.json) | A reviewable six-question browser session                                 |
 | ✅ [Release readiness](docs/release-readiness.json)           | Verified deployment, video, and test evidence                             |
-| 📝 [HiDevs submission draft](docs/submission-draft.md)        | Prepared entry; **submission awaits explicit owner approval**             |
+| [HiDevs submission receipt](docs/submission-receipt.json)     | Confirmed submission; platform evaluation pending                         |
 
 ## 👩‍💻 Author and AI assistance
 
