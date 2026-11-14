@@ -1,0 +1,277 @@
+{
+  "demonstration": "Synthetic browser walkthrough; responses entered by the developer for verification.",
+  "schemaVersion": 1,
+  "title": "Inside the living cell",
+  "engine": "browser-t5-with-source-checks",
+  "contentHash": "6qbbt4",
+  "policy": "two-correct-up-one-wrong-down-v1",
+  "total": 6,
+  "correct": 5,
+  "accuracy": 83,
+  "topics": [
+    {
+      "topic": "Cell structures",
+      "total": 5,
+      "correct": 4
+    },
+    {
+      "topic": "Cell boundaries",
+      "total": 1,
+      "correct": 1
+    }
+  ],
+  "seconds": 67,
+  "confidentMisses": 1,
+  "interval": [
+    44,
+    97
+  ],
+  "responses": [
+    {
+      "item": {
+        "id": "7b5xgz-2",
+        "factId": "7b5xgz",
+        "topic": "Cell structures",
+        "level": 2,
+        "stem": "What is the organelle that breaks down worn-out cell components using digestive enzymes?",
+        "options": [
+          "Mitochondrion",
+          "Nucleus",
+          "Lysosome",
+          "Ribosome"
+        ],
+        "answer": "Lysosome",
+        "source": "Lysosome is the organelle that breaks down worn-out cell components using digestive enzymes.",
+        "line": 7,
+        "origin": "ai",
+        "rationale": "Lysosome matches because the notes state: “Lysosome is the organelle that breaks down worn-out cell components using digestive enzymes.”",
+        "distractors": [
+          {
+            "option": "Mitochondrion",
+            "why": "Mitochondrion: the organelle that releases usable energy through cellular respiration. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Ribosome",
+            "why": "Ribosome: the structure that assembles proteins using messenger RNA instructions. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Nucleus",
+            "why": "Nucleus: the organelle that stores DNA and controls gene expression. This describes a different concept in the same topic."
+          }
+        ]
+      },
+      "selected": "Lysosome",
+      "correct": true,
+      "confidence": "Sure",
+      "seconds": 6.041,
+      "before": 2,
+      "after": 2,
+      "reason": "One correct answer; keep this level to confirm understanding."
+    },
+    {
+      "item": {
+        "id": "70lwth-2",
+        "factId": "70lwth",
+        "topic": "Cell boundaries",
+        "level": 2,
+        "stem": "Which term matches this description: “the gel-like material where many cell reactions take place”?",
+        "options": [
+          "Cell membrane",
+          "Cytoplasm",
+          "Plasmodesma",
+          "Cell wall"
+        ],
+        "answer": "Cytoplasm",
+        "source": "Cytoplasm is the gel-like material where many cell reactions take place.",
+        "line": 12,
+        "origin": "source",
+        "rationale": "Cytoplasm matches because the notes state: “Cytoplasm is the gel-like material where many cell reactions take place.”",
+        "distractors": [
+          {
+            "option": "Plasmodesma",
+            "why": "Plasmodesma: the channel that connects the cytoplasm of neighboring plant cells. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Cell wall",
+            "why": "Cell wall: the rigid outer layer that supports and protects plant cells. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Cell membrane",
+            "why": "Cell membrane: the selectively permeable boundary that regulates movement into and out of cells. This describes a different concept in the same topic."
+          }
+        ]
+      },
+      "selected": "Cytoplasm",
+      "correct": true,
+      "confidence": "Unsure",
+      "seconds": 5.321,
+      "before": 2,
+      "after": 3,
+      "reason": "Two correct answers in a row raise the next question by one level."
+    },
+    {
+      "item": {
+        "id": "6np78g-3",
+        "factId": "6np78g",
+        "topic": "Cell structures",
+        "level": 3,
+        "stem": "Which term–description pairing agrees with the study notes?",
+        "options": [
+          "Nucleus — the organelle that breaks down worn-out cell components using digestive enzymes",
+          "Lysosome — the organelle that captures light energy for photosynthesis in plant cells",
+          "Chloroplast — the organelle that stores DNA and controls gene expression",
+          "Mitochondrion — the organelle that releases usable energy through cellular respiration"
+        ],
+        "answer": "Mitochondrion — the organelle that releases usable energy through cellular respiration",
+        "source": "Mitochondrion is the organelle that releases usable energy through cellular respiration.",
+        "line": 3,
+        "origin": "source",
+        "rationale": "Mitochondrion matches because the notes state: “Mitochondrion is the organelle that releases usable energy through cellular respiration.”",
+        "distractors": [
+          {
+            "option": "Chloroplast — the organelle that stores DNA and controls gene expression",
+            "why": "The notes define Chloroplast as the organelle that captures light energy for photosynthesis in plant cells; the pairing uses another concept’s definition."
+          },
+          {
+            "option": "Nucleus — the organelle that breaks down worn-out cell components using digestive enzymes",
+            "why": "The notes define Nucleus as the organelle that stores DNA and controls gene expression; the pairing uses another concept’s definition."
+          },
+          {
+            "option": "Lysosome — the organelle that captures light energy for photosynthesis in plant cells",
+            "why": "The notes define Lysosome as the organelle that breaks down worn-out cell components using digestive enzymes; the pairing uses another concept’s definition."
+          }
+        ]
+      },
+      "selected": "Nucleus — the organelle that breaks down worn-out cell components using digestive enzymes",
+      "correct": false,
+      "confidence": "Sure",
+      "seconds": 35.979,
+      "before": 3,
+      "after": 2,
+      "reason": "A missed answer lowers the next question by one level."
+    },
+    {
+      "item": {
+        "id": "11lk7vm-2",
+        "factId": "11lk7vm",
+        "topic": "Cell structures",
+        "level": 2,
+        "stem": "What is the structure that assembles proteins using messenger RNA instructions?",
+        "options": [
+          "Ribosome",
+          "Mitochondrion",
+          "Nucleus",
+          "Lysosome"
+        ],
+        "answer": "Ribosome",
+        "source": "Ribosome is the structure that assembles proteins using messenger RNA instructions.",
+        "line": 4,
+        "origin": "ai",
+        "rationale": "Ribosome matches because the notes state: “Ribosome is the structure that assembles proteins using messenger RNA instructions.”",
+        "distractors": [
+          {
+            "option": "Lysosome",
+            "why": "Lysosome: the organelle that breaks down worn-out cell components using digestive enzymes. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Nucleus",
+            "why": "Nucleus: the organelle that stores DNA and controls gene expression. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Mitochondrion",
+            "why": "Mitochondrion: the organelle that releases usable energy through cellular respiration. This describes a different concept in the same topic."
+          }
+        ]
+      },
+      "selected": "Ribosome",
+      "correct": true,
+      "confidence": "Unsure",
+      "seconds": 5.979,
+      "before": 2,
+      "after": 2,
+      "reason": "One correct answer; keep this level to confirm understanding."
+    },
+    {
+      "item": {
+        "id": "14ns01q-2",
+        "factId": "14ns01q",
+        "topic": "Cell structures",
+        "level": 2,
+        "stem": "What is the organelle that captures light energy for photosynthesis in plant cells?",
+        "options": [
+          "Nucleus",
+          "Mitochondrion",
+          "Chloroplast",
+          "Lysosome"
+        ],
+        "answer": "Chloroplast",
+        "source": "Chloroplast is the organelle that captures light energy for photosynthesis in plant cells.",
+        "line": 5,
+        "origin": "ai",
+        "rationale": "Chloroplast matches because the notes state: “Chloroplast is the organelle that captures light energy for photosynthesis in plant cells.”",
+        "distractors": [
+          {
+            "option": "Mitochondrion",
+            "why": "Mitochondrion: the organelle that releases usable energy through cellular respiration. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Nucleus",
+            "why": "Nucleus: the organelle that stores DNA and controls gene expression. This describes a different concept in the same topic."
+          },
+          {
+            "option": "Lysosome",
+            "why": "Lysosome: the organelle that breaks down worn-out cell components using digestive enzymes. This describes a different concept in the same topic."
+          }
+        ]
+      },
+      "selected": "Chloroplast",
+      "correct": true,
+      "confidence": "Unsure",
+      "seconds": 6.547,
+      "before": 2,
+      "after": 3,
+      "reason": "Two correct answers in a row raise the next question by one level."
+    },
+    {
+      "item": {
+        "id": "tr9rvr-3",
+        "factId": "tr9rvr",
+        "topic": "Cell structures",
+        "level": 3,
+        "stem": "Which term–description pairing agrees with the study notes?",
+        "options": [
+          "Nucleus — the organelle that breaks down worn-out cell components using digestive enzymes",
+          "Ribosome — the organelle that stores DNA and controls gene expression",
+          "Lysosome — the structure that assembles proteins using messenger RNA instructions",
+          "Vacuole — the compartment that stores water and dissolved substances inside a cell"
+        ],
+        "answer": "Vacuole — the compartment that stores water and dissolved substances inside a cell",
+        "source": "Vacuole is the compartment that stores water and dissolved substances inside a cell.",
+        "line": 6,
+        "origin": "source",
+        "rationale": "Vacuole matches because the notes state: “Vacuole is the compartment that stores water and dissolved substances inside a cell.”",
+        "distractors": [
+          {
+            "option": "Nucleus — the organelle that breaks down worn-out cell components using digestive enzymes",
+            "why": "The notes define Nucleus as the organelle that stores DNA and controls gene expression; the pairing uses another concept’s definition."
+          },
+          {
+            "option": "Lysosome — the structure that assembles proteins using messenger RNA instructions",
+            "why": "The notes define Lysosome as the organelle that breaks down worn-out cell components using digestive enzymes; the pairing uses another concept’s definition."
+          },
+          {
+            "option": "Ribosome — the organelle that stores DNA and controls gene expression",
+            "why": "The notes define Ribosome as the structure that assembles proteins using messenger RNA instructions; the pairing uses another concept’s definition."
+          }
+        ]
+      },
+      "selected": "Vacuole — the compartment that stores water and dissolved substances inside a cell",
+      "correct": true,
+      "confidence": "Unsure",
+      "seconds": 7.369,
+      "before": 3,
+      "after": 3,
+      "reason": "One correct answer; keep this level to confirm understanding."
+    }
+  ]
+}
