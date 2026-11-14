@@ -31,9 +31,11 @@ The sample set is small, English-only, and written by the developer. It is not a
 
 ## Verified release evidence
 
-- Public production site: https://bloompath-mcq.vercel.app � anonymous HTML and model asset requests returned HTTP 200 without redirects.
+- Public production site: https://bloompath-mcq.vercel.app | anonymous HTML and model asset requests returned HTTP 200 without redirects.
 - Both quality and real-model integration jobs passed for application commit `06485d9619141581f409c61d4709750d223120e8`, run https://github.com/Janicebenita/personalized_mcq_generator_hidevs/actions/runs/43621351376 . Subsequent formatting and keyboard-focus improvements receive a fresh CI run before release.
 - Hosted browser AI completed a Biology assessment: 10 concepts, 2 topics, 8 accepted browser stems. The Node evaluation accepted 24 of 34 across all subjects; backend differences can change greedy generation. Provenance remains visible in both cases.
 - An actual six-question synthetic browser session followed levels 2, 2, 3, 2, 2, 3. Two correct answers raised the task level; a deliberate miss lowered it. Results showed 5/6 correct, one confident miss, and topic totals matching the exported JSON.
 - The complete synthetic session export is in `docs/demo/browser-session.json`; browser screenshots are in `docs/screenshots/`.
-- The narrated demonstration is 146.88 seconds, H.264/AAC at 1920�1080, and is shared through Google Drive with Viewer access for anyone with the link.
+- The narrated demonstration is 146.88 seconds, H.264/AAC at 1920x1080, and is shared through Google Drive with Viewer access for anyone with the link.
+
+The YouTube demo is published as Unlisted at https://youtu.be/7qaD6AOwUzg on @JaniceBenita-d6x. Its publication was verified in Studio and through an anonymous metadata request. HiDevs submission remains pending explicit user approval.

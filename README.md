@@ -25,7 +25,7 @@ Turn English study notes into source-grounded multiple-choice practice. BloomPat
 
 ## Try it
 
-**[Open the live app](https://bloompath-mcq.vercel.app)** � **[Watch the 2-minute 27-second demo on Google Drive](https://drive.google.com/file/d/1GuStRFiFee0ufSnXvgIFJAi9wtPU8myv/view)** � [Download the demo](https://github.com/Janicebenita/personalized_mcq_generator_hidevs/releases/download/v1.0.0/bloompath-demo.mp4)
+**[Open the live app](https://bloompath-mcq.vercel.app)** | **[Watch the 2:27 YouTube demo](https://youtu.be/7qaD6AOwUzg)** | [Google Drive copy](https://drive.google.com/file/d/1GuStRFiFee0ufSnXvgIFJAi9wtPU8myv/view) | [Download the demo](https://github.com/Janicebenita/personalized_mcq_generator_hidevs/releases/download/v1.0.0/bloompath-demo.mp4)
 
 The narrated video uses actual browser screenshots from synthetic practice sessions, not a continuous screen recording. A [transcript](docs/demo/transcript.txt), [session export](docs/demo/browser-session.json), and [model evaluation](docs/evaluation.json) make the demonstration reviewable.
 
