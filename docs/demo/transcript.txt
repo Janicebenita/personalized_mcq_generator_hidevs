@@ -1,0 +1,26 @@
+BloomPath narrated walkthrough
+Actual browser screenshots; this is not a continuous screen recording. Narration uses a synthetic Windows voice.
+
+01  Your notes, a focused practice session
+BloomPath is a personalized multiple choice practice tool. Start with Biology, Python, or Earth science, or paste your own English study notes. Related definitions are grouped by topic. This walkthrough uses synthetic learning material and actual browser screenshots.
+
+02  Real browser AI, with source checks
+An answer aware T five model writes question stems on the learner's device. There is no inference API, subscription, or secret key. The assessment shows how many stems passed source checks. Rejected questions use clearly labeled source templates. First use downloads the model.
+
+03  Four choices, one grounded answer
+Each question has four distinct options from the same source topic. The correct answer is anchored in the notes. The learner can record confidence before grading. Confidence and speed do not change the score, and the same target concept is not repeated within a session.
+
+04  Understand the evidence
+After answering, the learner sees the correct choice, an explanation, and the exact source line. Explanations for the distractors are also available. This makes the question reviewable. Source checks reduce obvious mistakes, but a teacher should still review questions before classroom use.
+
+05  Adapt the task, not just the label
+Practice starts at Connect. Two consecutive correct answers raise the next question to Challenge. The task changes from identifying a term to comparing term and description pairs. Related terms are deliberately paired with the wrong definitions to create distractors.
+
+06  A missed answer changes the path
+Here, a deliberate incorrect answer lowers the next task by one level. The reason is displayed immediately. Topic selection favors weaker areas among unseen concepts. The repository also contains two different simulated learner profiles across all three sample subjects.
+
+07  Useful insights, with honest uncertainty
+The results summarize observed accuracy, topic performance, recorded answer time, and confident mistakes. A short quiz is only a snapshot, so BloomPath shows counts and uncertainty rather than claiming a validated mastery score. Missed concepts link back to their source evidence.
+
+08  A transparent, reproducible prototype
+The difficulty journey explains every adjustment. Learners can export their session as JSON or CSV. Fifty six automated tests cover the assessment core and reference questions. GitHub checks also run the actual model. BloomPath is live on Vercel's free Hobby workspace, with no paid inference service.

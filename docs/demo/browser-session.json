@@ -22,10 +22,7 @@
   ],
   "seconds": 67,
   "confidentMisses": 1,
-  "interval": [
-    44,
-    97
-  ],
+  "interval": [44, 97],
   "responses": [
     {
       "item": {
@@ -34,12 +31,7 @@
         "topic": "Cell structures",
         "level": 2,
         "stem": "What is the organelle that breaks down worn-out cell components using digestive enzymes?",
-        "options": [
-          "Mitochondrion",
-          "Nucleus",
-          "Lysosome",
-          "Ribosome"
-        ],
+        "options": ["Mitochondrion", "Nucleus", "Lysosome", "Ribosome"],
         "answer": "Lysosome",
         "source": "Lysosome is the organelle that breaks down worn-out cell components using digestive enzymes.",
         "line": 7,
@@ -75,12 +67,7 @@
         "topic": "Cell boundaries",
         "level": 2,
         "stem": "Which term matches this description: “the gel-like material where many cell reactions take place”?",
-        "options": [
-          "Cell membrane",
-          "Cytoplasm",
-          "Plasmodesma",
-          "Cell wall"
-        ],
+        "options": ["Cell membrane", "Cytoplasm", "Plasmodesma", "Cell wall"],
         "answer": "Cytoplasm",
         "source": "Cytoplasm is the gel-like material where many cell reactions take place.",
         "line": 12,
@@ -157,12 +144,7 @@
         "topic": "Cell structures",
         "level": 2,
         "stem": "What is the structure that assembles proteins using messenger RNA instructions?",
-        "options": [
-          "Ribosome",
-          "Mitochondrion",
-          "Nucleus",
-          "Lysosome"
-        ],
+        "options": ["Ribosome", "Mitochondrion", "Nucleus", "Lysosome"],
         "answer": "Ribosome",
         "source": "Ribosome is the structure that assembles proteins using messenger RNA instructions.",
         "line": 4,
@@ -198,12 +180,7 @@
         "topic": "Cell structures",
         "level": 2,
         "stem": "What is the organelle that captures light energy for photosynthesis in plant cells?",
-        "options": [
-          "Nucleus",
-          "Mitochondrion",
-          "Chloroplast",
-          "Lysosome"
-        ],
+        "options": ["Nucleus", "Mitochondrion", "Chloroplast", "Lysosome"],
         "answer": "Chloroplast",
         "source": "Chloroplast is the organelle that captures light energy for photosynthesis in plant cells.",
         "line": 5,

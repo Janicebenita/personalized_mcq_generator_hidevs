@@ -8,7 +8,12 @@ Turn English study notes into source-grounded multiple-choice practice. BloomPat
 
 ## Try it
 
-The Vercel deployment URL and demonstration video will be added after release verification.
+**[Open the live app](https://bloompath-mcq.vercel.app)** � **[Watch the 2-minute 27-second demo on Google Drive](https://drive.google.com/file/d/1GuStRFiFee0ufSnXvgIFJAi9wtPU8myv/view)** � [Download the demo](https://github.com/Janicebenita/personalized_mcq_generator_hidevs/releases/download/v1.0.0/bloompath-demo.mp4)
+
+The narrated video uses actual browser screenshots from synthetic practice sessions, not a continuous screen recording. A [transcript](docs/demo/transcript.txt), [session export](docs/demo/browser-session.json), and [model evaluation](docs/evaluation.json) make the demonstration reviewable.
+
+![BloomPath assessment studio](docs/screenshots/studio.jpg)
+![BloomPath learning insights](docs/screenshots/insights-overview.jpg)
 
 1. Choose Biology, Python, or Earth science, or paste your own notes.
 2. Select **Browser AI + source checks** and build an assessment. First use downloads approximately 97 MB of model files plus the WebAssembly runtime; allow a few minutes on a slow connection. No key or AI-service account is needed. **Source practice** works instantly without generative AI.
@@ -18,12 +23,12 @@ The Vercel deployment URL and demonstration video will be added after release ve
 
 ## What makes the assessment personalized
 
-| Criterion | Implementation | Evidence |
-| --- | --- | --- |
-| Question relevance | Answer-aware T5 generation uses a specific term and source definition. Conservative checks reject unsupported words, answer leaks, dropped defining attributes, low source coverage, and malformed stems. | [Model evaluation](docs/evaluation.json), [core](src/core.ts) |
+| Criterion                       | Implementation                                                                                                                                                                                                     | Evidence                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| Question relevance              | Answer-aware T5 generation uses a specific term and source definition. Conservative checks reject unsupported words, answer leaks, dropped defining attributes, low source coverage, and malformed stems.          | [Model evaluation](docs/evaluation.json), [core](src/core.ts)    |
 | Correct answers and distractors | The answer comes from the notes. Four distinct choices use related concepts from the same topic. Challenge questions deliberately mismatch term–definition pairs. Source lines and explanations accompany the key. | Question invariants across 34 source facts and three task levels |
-| Adaptation | Starts at Connect. Two consecutive correct answers raise the level; one incorrect answer lowers it. Selection favors the weakest topic among unseen target concepts. | Six reproducible learner simulations in the evaluation report |
-| UI and learning insights | Responsive interface, semantic labels, keyboard choices, reduced-motion support, confidence reflection, transparent policy, and exports. | Browser walkthrough and [testing notes](docs/TESTING.md) |
+| Adaptation                      | Starts at Connect. Two consecutive correct answers raise the level; one incorrect answer lowers it. Selection favors the weakest topic among unseen target concepts.                                               | Six reproducible learner simulations in the evaluation report    |
+| UI and learning insights        | Responsive interface, semantic labels, keyboard choices, reduced-motion support, confidence reflection, transparent policy, and exports.                                                                           | Browser walkthrough and [testing notes](docs/TESTING.md)         |
 
 ### Three different practice tasks
 

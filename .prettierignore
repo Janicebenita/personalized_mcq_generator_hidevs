@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.cache
+.model-venv
+.git
+public/models
+docs/screenshots
+docs/demo/*.mp4

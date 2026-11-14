@@ -2,7 +2,7 @@
   "source": "valhalla/t5-small-qg-hl",
   "revision": "9fdee3255929ba5f0b9d45e76e1e0184f664a368",
   "license": "MIT",
-  "export": "optimum-onnx 0.1.0; opset17; dynamic int8 MatMul",
+  "export": "optimum-onnx 0.1.0; opset17; dynamic int8 MatMul/Gather including decoder subgraphs",
   "files": [
     {
       "path": "added_tokens.json",

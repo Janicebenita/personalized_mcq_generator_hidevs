@@ -8,5 +8,5 @@ for name in ['encoder_model','decoder_model_merged']:
 files=[]
 for p in target.rglob('*'):
  if p.is_file():files.append({'path':str(p.relative_to(target)).replace('\\','/'),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
-Path('docs/model-manifest.json').write_text(json.dumps({'source':'valhalla/t5-small-qg-hl','revision':'9fdee3255929ba5f0b9d45e76e1e0184f664a368','license':'MIT','export':'optimum-onnx 0.1.0; opset17; dynamic int8 MatMul','files':files},indent=2))
+Path('docs/model-manifest.json').write_text(json.dumps({'source':'valhalla/t5-small-qg-hl','revision':'9fdee3255929ba5f0b9d45e76e1e0184f664a368','license':'MIT','export':'optimum-onnx 0.1.0; opset17; dynamic int8 MatMul/Gather including decoder subgraphs','files':files},indent=2))
 print(json.dumps(files,indent=2))

@@ -16,12 +16,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the organelle that stores DNA and controls gene expression”?",
       "origin": "source",
-      "options": [
-        "Nucleus",
-        "Mitochondrion",
-        "Chloroplast",
-        "Vacuole"
-      ],
+      "options": ["Nucleus", "Mitochondrion", "Chloroplast", "Vacuole"],
       "answer": "Nucleus",
       "ms": 147
     },
@@ -33,12 +28,7 @@
       "accepted": true,
       "finalStem": "What is the organelle that releases usable energy through cellular respiration?",
       "origin": "ai",
-      "options": [
-        "Chloroplast",
-        "Mitochondrion",
-        "Lysosome",
-        "Nucleus"
-      ],
+      "options": ["Chloroplast", "Mitochondrion", "Lysosome", "Nucleus"],
       "answer": "Mitochondrion",
       "ms": 188
     },
@@ -50,12 +40,7 @@
       "accepted": true,
       "finalStem": "What is the structure that assembles proteins using messenger RNA instructions?",
       "origin": "ai",
-      "options": [
-        "Ribosome",
-        "Mitochondrion",
-        "Nucleus",
-        "Lysosome"
-      ],
+      "options": ["Ribosome", "Mitochondrion", "Nucleus", "Lysosome"],
       "answer": "Ribosome",
       "ms": 174
     },
@@ -67,12 +52,7 @@
       "accepted": true,
       "finalStem": "What is the organelle that captures light energy for photosynthesis in plant cells?",
       "origin": "ai",
-      "options": [
-        "Nucleus",
-        "Lysosome",
-        "Mitochondrion",
-        "Chloroplast"
-      ],
+      "options": ["Nucleus", "Lysosome", "Mitochondrion", "Chloroplast"],
       "answer": "Chloroplast",
       "ms": 200
     },
@@ -84,12 +64,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the compartment that stores water and dissolved substances inside a cell”?",
       "origin": "source",
-      "options": [
-        "Vacuole",
-        "Nucleus",
-        "Lysosome",
-        "Ribosome"
-      ],
+      "options": ["Vacuole", "Nucleus", "Lysosome", "Ribosome"],
       "answer": "Vacuole",
       "ms": 201
     },
@@ -101,12 +76,7 @@
       "accepted": true,
       "finalStem": "What is the organelle that breaks down worn-out cell components using digestive enzymes?",
       "origin": "ai",
-      "options": [
-        "Nucleus",
-        "Ribosome",
-        "Lysosome",
-        "Mitochondrion"
-      ],
+      "options": ["Nucleus", "Ribosome", "Lysosome", "Mitochondrion"],
       "answer": "Lysosome",
       "ms": 302
     },
@@ -118,12 +88,7 @@
       "accepted": true,
       "finalStem": "What is the selectively permeable boundary that regulates movement into and out of cells?",
       "origin": "ai",
-      "options": [
-        "Cell membrane",
-        "Cell wall",
-        "Plasmodesma",
-        "Cytoplasm"
-      ],
+      "options": ["Cell membrane", "Cell wall", "Plasmodesma", "Cytoplasm"],
       "answer": "Cell membrane",
       "ms": 334
     },
@@ -135,12 +100,7 @@
       "accepted": true,
       "finalStem": "What is the rigid outer layer that supports plant cells?",
       "origin": "ai",
-      "options": [
-        "Cell membrane",
-        "Plasmodesma",
-        "Cell wall",
-        "Cytoplasm"
-      ],
+      "options": ["Cell membrane", "Plasmodesma", "Cell wall", "Cytoplasm"],
       "answer": "Cell wall",
       "ms": 174
     },
@@ -152,12 +112,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the gel-like material where many cell reactions take place”?",
       "origin": "source",
-      "options": [
-        "Cell wall",
-        "Cell membrane",
-        "Plasmodesma",
-        "Cytoplasm"
-      ],
+      "options": ["Cell wall", "Cell membrane", "Plasmodesma", "Cytoplasm"],
       "answer": "Cytoplasm",
       "ms": 157
     },
@@ -169,12 +124,7 @@
       "accepted": true,
       "finalStem": "What is the channel that connects the cytoplasm of neighboring plant cells?",
       "origin": "ai",
-      "options": [
-        "Plasmodesma",
-        "Cell wall",
-        "Cell membrane",
-        "Cytoplasm"
-      ],
+      "options": ["Plasmodesma", "Cell wall", "Cell membrane", "Cytoplasm"],
       "answer": "Plasmodesma",
       "ms": 200
     },
@@ -186,12 +136,7 @@
       "accepted": true,
       "finalStem": "What is a mutable ordered collection of items in Python?",
       "origin": "ai",
-      "options": [
-        "Dictionary",
-        "List",
-        "Tuple",
-        "Set"
-      ],
+      "options": ["Dictionary", "List", "Tuple", "Set"],
       "answer": "List",
       "ms": 163
     },
@@ -203,12 +148,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “an immutable ordered collection of items in Python”?",
       "origin": "source",
-      "options": [
-        "Dictionary",
-        "Tuple",
-        "List",
-        "Set"
-      ],
+      "options": ["Dictionary", "Tuple", "List", "Set"],
       "answer": "Tuple",
       "ms": 120
     },
@@ -220,12 +160,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “an unordered collection of unique items in Python”?",
       "origin": "source",
-      "options": [
-        "List",
-        "Dictionary",
-        "Set",
-        "Tuple"
-      ],
+      "options": ["List", "Dictionary", "Set", "Tuple"],
       "answer": "Set",
       "ms": 131
     },
@@ -237,12 +172,7 @@
       "accepted": true,
       "finalStem": "What is a mutable mapping from unique keys to values in Python?",
       "origin": "ai",
-      "options": [
-        "Dictionary",
-        "Set",
-        "Tuple",
-        "List"
-      ],
+      "options": ["Dictionary", "Set", "Tuple", "List"],
       "answer": "Dictionary",
       "ms": 189
     },
@@ -254,12 +184,7 @@
       "accepted": true,
       "finalStem": "What is a control structure that iterates over the items of an iterable?",
       "origin": "ai",
-      "options": [
-        "For loop",
-        "Continue statement",
-        "While loop",
-        "Break statement"
-      ],
+      "options": ["For loop", "Continue statement", "While loop", "Break statement"],
       "answer": "For loop",
       "ms": 260
     },
@@ -271,12 +196,7 @@
       "accepted": true,
       "finalStem": "What is a control structure that repeats while a condition remains true?",
       "origin": "ai",
-      "options": [
-        "For loop",
-        "Continue statement",
-        "While loop",
-        "Break statement"
-      ],
+      "options": ["For loop", "Continue statement", "While loop", "Break statement"],
       "answer": "While loop",
       "ms": 230
     },
@@ -288,12 +208,7 @@
       "accepted": true,
       "finalStem": "What is the instruction that exits the nearest enclosing loop?",
       "origin": "ai",
-      "options": [
-        "Continue statement",
-        "For loop",
-        "While loop",
-        "Break statement"
-      ],
+      "options": ["Continue statement", "For loop", "While loop", "Break statement"],
       "answer": "Break statement",
       "ms": 207
     },
@@ -305,12 +220,7 @@
       "accepted": true,
       "finalStem": "What is the instruction that skips the rest of the current loop iteration?",
       "origin": "ai",
-      "options": [
-        "Break statement",
-        "While loop",
-        "Continue statement",
-        "For loop"
-      ],
+      "options": ["Break statement", "While loop", "Continue statement", "For loop"],
       "answer": "Continue statement",
       "ms": 210
     },
@@ -322,12 +232,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “a named placeholder in a function definition”?",
       "origin": "source",
-      "options": [
-        "Parameter",
-        "Argument",
-        "Return statement",
-        "Lambda expression"
-      ],
+      "options": ["Parameter", "Argument", "Return statement", "Lambda expression"],
       "answer": "Parameter",
       "ms": 152
     },
@@ -339,12 +244,7 @@
       "accepted": true,
       "finalStem": "What is a value passed to a function when it is called?",
       "origin": "ai",
-      "options": [
-        "Argument",
-        "Parameter",
-        "Return statement",
-        "Lambda expression"
-      ],
+      "options": ["Argument", "Parameter", "Return statement", "Lambda expression"],
       "answer": "Argument",
       "ms": 181
     },
@@ -356,12 +256,7 @@
       "accepted": true,
       "finalStem": "What is the instruction that sends a result back to a function caller?",
       "origin": "ai",
-      "options": [
-        "Argument",
-        "Parameter",
-        "Return statement",
-        "Lambda expression"
-      ],
+      "options": ["Argument", "Parameter", "Return statement", "Lambda expression"],
       "answer": "Return statement",
       "ms": 195
     },
@@ -373,12 +268,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the expression that creates a small anonymous function”?",
       "origin": "source",
-      "options": [
-        "Lambda expression",
-        "Argument",
-        "Parameter",
-        "Return statement"
-      ],
+      "options": ["Lambda expression", "Argument", "Parameter", "Return statement"],
       "answer": "Lambda expression",
       "ms": 226
     },
@@ -390,12 +280,7 @@
       "accepted": true,
       "finalStem": "What is the process that changes liquid water into water vapor by absorbing energy?",
       "origin": "ai",
-      "options": [
-        "Infiltration",
-        "Condensation",
-        "Evaporation",
-        "Transpiration"
-      ],
+      "options": ["Infiltration", "Condensation", "Evaporation", "Transpiration"],
       "answer": "Evaporation",
       "ms": 206
     },
@@ -407,12 +292,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the process that changes water vapor into liquid droplets by releasing energy”?",
       "origin": "source",
-      "options": [
-        "Condensation",
-        "Evaporation",
-        "Infiltration",
-        "Transpiration"
-      ],
+      "options": ["Condensation", "Evaporation", "Infiltration", "Transpiration"],
       "answer": "Condensation",
       "ms": 183
     },
@@ -424,12 +304,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the falling of water from clouds as rain, snow, sleet, or hail”?",
       "origin": "source",
-      "options": [
-        "Transpiration",
-        "Runoff",
-        "Precipitation",
-        "Infiltration"
-      ],
+      "options": ["Transpiration", "Runoff", "Precipitation", "Infiltration"],
       "answer": "Precipitation",
       "ms": 150
     },
@@ -441,12 +316,7 @@
       "accepted": true,
       "finalStem": "What is the release of water from plant leaves?",
       "origin": "ai",
-      "options": [
-        "Precipitation",
-        "Runoff",
-        "Infiltration",
-        "Transpiration"
-      ],
+      "options": ["Precipitation", "Runoff", "Infiltration", "Transpiration"],
       "answer": "Transpiration",
       "ms": 197
     },
@@ -458,12 +328,7 @@
       "accepted": true,
       "finalStem": "What is the movement of surface water into soil?",
       "origin": "ai",
-      "options": [
-        "Infiltration",
-        "Evaporation",
-        "Transpiration",
-        "Runoff"
-      ],
+      "options": ["Infiltration", "Evaporation", "Transpiration", "Runoff"],
       "answer": "Infiltration",
       "ms": 171
     },
@@ -475,12 +340,7 @@
       "accepted": true,
       "finalStem": "What is the flow of water over the land surface toward streams and rivers?",
       "origin": "ai",
-      "options": [
-        "Infiltration",
-        "Transpiration",
-        "Precipitation",
-        "Runoff"
-      ],
+      "options": ["Infiltration", "Transpiration", "Precipitation", "Runoff"],
       "answer": "Runoff",
       "ms": 215
     },
@@ -492,12 +352,7 @@
       "accepted": false,
       "finalStem": "Which term matches this description: “the breakdown of rocks at Earth’s surface without transporting the fragments”?",
       "origin": "source",
-      "options": [
-        "Metamorphism",
-        "Compaction",
-        "Erosion",
-        "Weathering"
-      ],
+      "options": ["Metamorphism", "Compaction", "Erosion", "Weathering"],
       "answer": "Weathering",
       "ms": 183
     },
@@ -509,12 +364,7 @@
       "accepted": true,
       "finalStem": "What is the transport of rock fragments by water, wind, ice, or gravity?",
       "origin": "ai",
-      "options": [
-        "Erosion",
-        "Cementation",
-        "Metamorphism",
-        "Weathering"
-      ],
+      "options": ["Erosion", "Cementation", "Metamorphism", "Weathering"],
       "answer": "Erosion",
       "ms": 259
     },
@@ -526,12 +376,7 @@
       "accepted": true,
       "finalStem": "What is the settling of transported sediment in a new location?",
       "origin": "ai",
-      "options": [
-        "Compaction",
-        "Metamorphism",
-        "Deposition",
-        "Cementation"
-      ],
+      "options": ["Compaction", "Metamorphism", "Deposition", "Cementation"],
       "answer": "Deposition",
       "ms": 177
     },
@@ -543,12 +388,7 @@
       "accepted": true,
       "finalStem": "What is the compression of sediment layers under the weight of overlying material?",
       "origin": "ai",
-      "options": [
-        "Metamorphism",
-        "Compaction",
-        "Deposition",
-        "Cementation"
-      ],
+      "options": ["Metamorphism", "Compaction", "Deposition", "Cementation"],
       "answer": "Compaction",
       "ms": 219
     },
@@ -560,12 +400,7 @@
       "accepted": true,
       "finalStem": "What is the binding of sediment grains by minerals deposited between them?",
       "origin": "ai",
-      "options": [
-        "Deposition",
-        "Metamorphism",
-        "Compaction",
-        "Cementation"
-      ],
+      "options": ["Deposition", "Metamorphism", "Compaction", "Cementation"],
       "answer": "Cementation",
       "ms": 207
     },
@@ -577,12 +412,7 @@
       "accepted": true,
       "finalStem": "What is the alteration of existing rock by heat and pressure without melting?",
       "origin": "ai",
-      "options": [
-        "Metamorphism",
-        "Cementation",
-        "Erosion",
-        "Weathering"
-      ],
+      "options": ["Metamorphism", "Cementation", "Erosion", "Weathering"],
       "answer": "Metamorphism",
       "ms": 219
     }
@@ -591,16 +421,7 @@
     {
       "sample": "biology",
       "profile": "all-correct",
-      "levels": [
-        2,
-        2,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
-      ],
+      "levels": [2, 2, 3, 3, 3, 3, 3, 3],
       "concepts": [
         "7b5xgz",
         "70lwth",
@@ -626,16 +447,7 @@
     {
       "sample": "biology",
       "profile": "needs-support",
-      "levels": [
-        2,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
+      "levels": [2, 1, 1, 1, 1, 1, 1, 1],
       "concepts": [
         "7b5xgz",
         "15buhb6",
@@ -661,16 +473,7 @@
     {
       "sample": "python",
       "profile": "all-correct",
-      "levels": [
-        2,
-        2,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
-      ],
+      "levels": [2, 2, 3, 3, 3, 3, 3, 3],
       "concepts": [
         "8yellw",
         "1veryqb",
@@ -696,16 +499,7 @@
     {
       "sample": "python",
       "profile": "needs-support",
-      "levels": [
-        2,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
+      "levels": [2, 1, 1, 1, 1, 1, 1, 1],
       "concepts": [
         "8yellw",
         "1gp4xcr",
@@ -731,16 +525,7 @@
     {
       "sample": "earth",
       "profile": "all-correct",
-      "levels": [
-        2,
-        2,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
-      ],
+      "levels": [2, 2, 3, 3, 3, 3, 3, 3],
       "concepts": [
         "58yfs7",
         "kyu7l2",
@@ -766,16 +551,7 @@
     {
       "sample": "earth",
       "profile": "needs-support",
-      "levels": [
-        2,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
+      "levels": [2, 1, 1, 1, 1, 1, 1, 1],
       "concepts": [
         "58yfs7",
         "9gfmuv",

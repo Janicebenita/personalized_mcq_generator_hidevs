@@ -1,75 +1,390 @@
 import './style.css';
-import {createIcons,icons} from 'lucide';
-import {samples} from './samples';
-import {parseContent,buildItem,newSession,chooseFact,grade,analytics,toCSV,escapeHTML as e,levelNames,validateStem,hash} from './core';
-import type {Fact,Item,Session,Level} from './core';
-type View='studio'|'practice'|'insights'|'guide';
-let view:View='studio',notes=samples[0].text,title=samples[0].title,selectedSample='biology',facts:Fact[]=[],warnings:string[]=[],stems:Record<string,string>={},session:Session|null=null,current:Item|null=null,choice='',confidence='Unsure',feedback=false,started=0,busy=false,progress='',error='',mode='ai',worker:Worker|null=null,aiCount=0;
-const root=document.querySelector<HTMLDivElement>('#app')!;
-const icon=(name:string,cls='')=>`<i data-lucide="${name}" class="${cls}"></i>`;
-const button=(id:string,label:string,kind='primary',extra='')=>`<button id="${id}" class="btn ${kind}" ${extra}>${label}</button>`;
-const pill=(text:string,cls='')=>`<span class="pill ${cls}">${e(text)}</span>`;
-const stat=(value:string,label:string,sub='')=>`<div class="stat"><strong>${e(value)}</strong><span>${e(label)}</span>${sub?`<small>${e(sub)}</small>`:''}</div>`;
-function shell(){
- const tabs:[View,string,string][]=[['studio','Create assessment','notebook-pen'],['practice','Practice room','target'],['insights','Learning insights','chart-no-axes-combined']];
- root.innerHTML=`<aside class="sidebar"><a href="#" class="brand" id="brand"><img src="/favicon.svg" alt=""/>BloomPath<span>STUDY WITH INTENTION</span></a><div class="workspace">${icon('book-open')} Personal workspace</div><p class="nav-caption">YOUR LEARNING SPACE</p><nav aria-label="Main navigation">${tabs.map(([key,label,i])=>`<button data-view="${key}" class="nav-item ${view===key?'active':''}" ${busy?'disabled':''}>${icon(i)}${label}${key==='practice'&&session?'<span class="nav-dot"></span>':''}</button>`).join('')}</nav><div class="sidebar-tip"><div class="tip-art">✦</div><h3>A little practice.<br/>A clearer picture.</h3><p>Find the concepts that need another look, one question at a time.</p><button data-view="guide" class="text-btn">How BloomPath works ${icon('arrow-up-right')}</button></div><div class="sidebar-foot">${icon('lock-keyhole')} Notes stay in your browser</div></aside>
- <div class="layout"><header class="topbar"><span>My workspace <span class="slash">/</span> <b>${view==='studio'?'Create assessment':view==='practice'?'Practice room':view==='insights'?'Learning insights':'How it works'}</b></span><div class="top-right"><span class="local-status"><span></span> Private by design</span><span class="avatar" aria-label="Personal learner">You</span></div></header><main id="main" tabindex="-1">${view==='studio'?studio():view==='practice'?practice():view==='insights'?insights():guide()}</main><footer>BloomPath <span>Thoughtful practice, grounded in your notes.</span><a href="https://github.com/Janicebenita/personalized_mcq_generator_hidevs" target="_blank" rel="noopener">View project ${icon('arrow-up-right')}</a></footer></div>`;
- createIcons({icons});bind();
+import { createIcons, icons } from 'lucide';
+import { samples } from './samples';
+import {
+  parseContent,
+  buildItem,
+  newSession,
+  chooseFact,
+  grade,
+  analytics,
+  toCSV,
+  escapeHTML as e,
+  levelNames,
+  validateStem,
+  hash,
+} from './core';
+import type { Fact, Item, Session, Level } from './core';
+type View = 'studio' | 'practice' | 'insights' | 'guide';
+let view: View = 'studio',
+  notes = samples[0].text,
+  title = samples[0].title,
+  selectedSample = 'biology',
+  facts: Fact[] = [],
+  warnings: string[] = [],
+  stems: Record<string, string> = {},
+  session: Session | null = null,
+  current: Item | null = null,
+  choice = '',
+  confidence = 'Unsure',
+  feedback = false,
+  started = 0,
+  busy = false,
+  progress = '',
+  error = '',
+  mode = 'ai',
+  worker: Worker | null = null,
+  aiCount = 0;
+const root = document.querySelector<HTMLDivElement>('#app')!;
+const icon = (name: string, cls = '') => `<i data-lucide="${name}" class="${cls}"></i>`;
+const button = (id: string, label: string, kind = 'primary', extra = '') =>
+  `<button id="${id}" class="btn ${kind}" ${extra}>${label}</button>`;
+const pill = (text: string, cls = '') => `<span class="pill ${cls}">${e(text)}</span>`;
+const stat = (value: string, label: string, sub = '') =>
+  `<div class="stat"><strong>${e(value)}</strong><span>${e(label)}</span>${sub ? `<small>${e(sub)}</small>` : ''}</div>`;
+function shell() {
+  const tabs: [View, string, string][] = [
+    ['studio', 'Create assessment', 'notebook-pen'],
+    ['practice', 'Practice room', 'target'],
+    ['insights', 'Learning insights', 'chart-no-axes-combined'],
+  ];
+  root.innerHTML = `<aside class="sidebar"><a href="#" class="brand" id="brand"><img src="/favicon.svg" alt=""/>BloomPath<span>STUDY WITH INTENTION</span></a><div class="workspace">${icon('book-open')} Personal workspace</div><p class="nav-caption">YOUR LEARNING SPACE</p><nav aria-label="Main navigation">${tabs.map(([key, label, i]) => `<button data-view="${key}" class="nav-item ${view === key ? 'active' : ''}" ${busy ? 'disabled' : ''}>${icon(i)}${label}${key === 'practice' && session ? '<span class="nav-dot"></span>' : ''}</button>`).join('')}</nav><div class="sidebar-tip"><div class="tip-art">✦</div><h3>A little practice.<br/>A clearer picture.</h3><p>Find the concepts that need another look, one question at a time.</p><button data-view="guide" class="text-btn">How BloomPath works ${icon('arrow-up-right')}</button></div><div class="sidebar-foot">${icon('lock-keyhole')} Notes stay in your browser</div></aside>
+ <div class="layout"><header class="topbar"><span>My workspace <span class="slash">/</span> <b>${view === 'studio' ? 'Create assessment' : view === 'practice' ? 'Practice room' : view === 'insights' ? 'Learning insights' : 'How it works'}</b></span><div class="top-right"><span class="local-status"><span></span> Private by design</span><span class="avatar" aria-label="Personal learner">You</span></div></header><main id="main" tabindex="-1">${view === 'studio' ? studio() : view === 'practice' ? practice() : view === 'insights' ? insights() : guide()}</main><footer>BloomPath <span>Thoughtful practice, grounded in your notes.</span><a href="https://github.com/Janicebenita/personalized_mcq_generator_hidevs" target="_blank" rel="noopener">View project ${icon('arrow-up-right')}</a></footer></div>`;
+  createIcons({ icons });
+  bind();
 }
-function studio(){return `<div class="page-heading"><div><div class="eyebrow">FROM NOTES TO KNOWLEDGE</div><h1>Make your next study session count.</h1><p>Build a practice set from your notes. Let each answer shape what comes next.</p></div><span class="heading-flower" aria-hidden="true">✳</span></div>
- <section class="journey" aria-label="Assessment steps"><div class="journey-step on"><span>1</span><div><b>Add your material</b><small>One topic or one chapter</small></div></div><div class="journey-line"></div><div class="journey-step ${facts.length?'on':''}"><span>2</span><div><b>Build your questions</b><small>Grounded in your source</small></div></div><div class="journey-line"></div><div class="journey-step"><span>3</span><div><b>Find your learning path</b><small>Adaptive practice & insights</small></div></div></section>
- <div class="studio-grid"><section class="card source-card"><div class="card-heading"><div><h2>${icon('file-text')} Your study material</h2><p>Start with a sample, or bring a topic of your own.</p></div><label class="upload btn secondary">${icon('upload')} Import notes<input id="file" type="file" accept=".txt,.md" hidden ${busy?'disabled':''}/></label></div>
- <label class="field-label" for="title">Assessment title</label><input id="title" type="text" maxlength="100" value="${e(title)}" ${busy?'disabled':''}/>
- <div class="label-row"><label class="field-label" for="notes">Study notes</label><span id="chars">${notes.length.toLocaleString()} characters · English</span></div><textarea id="notes" spellcheck="false" ${busy?'disabled':''}>${e(notes)}</textarea><div class="editor-hint">${icon('info')} Use one definition per line: <code>Term is a definition.</code> Group 4+ related concepts under a <code># Topic</code>.</div>
- <div class="settings"><div><label for="count" class="field-label">Practice length</label><select id="count" ${busy?'disabled':''}><option value="6" ${requested===6?'selected':''}>6 questions · Quick check</option><option value="8" ${requested===8?'selected':''}>8 questions · Focus session</option><option value="12" ${requested===12?'selected':''}>12 questions · Deeper practice</option></select></div><div><label for="engine" class="field-label">Question engine</label><select id="engine" ${busy?'disabled':''}><option value="ai" ${mode==='ai'?'selected':''}>Browser AI + source checks</option><option value="source" ${mode==='source'?'selected':''}>Source practice · Instant</option></select></div></div>
+function studio() {
+  return `<div class="page-heading"><div><div class="eyebrow">FROM NOTES TO KNOWLEDGE</div><h1>Make your next study session count.</h1><p>Build a practice set from your notes. Let each answer shape what comes next.</p></div><span class="heading-flower" aria-hidden="true">✳</span></div>
+ <section class="journey" aria-label="Assessment steps"><div class="journey-step on"><span>1</span><div><b>Add your material</b><small>One topic or one chapter</small></div></div><div class="journey-line"></div><div class="journey-step ${facts.length ? 'on' : ''}"><span>2</span><div><b>Build your questions</b><small>Grounded in your source</small></div></div><div class="journey-line"></div><div class="journey-step"><span>3</span><div><b>Find your learning path</b><small>Adaptive practice & insights</small></div></div></section>
+ <div class="studio-grid"><section class="card source-card"><div class="card-heading"><div><h2>${icon('file-text')} Your study material</h2><p>Start with a sample, or bring a topic of your own.</p></div><label class="upload btn secondary">${icon('upload')} Import notes<input id="file" type="file" accept=".txt,.md" hidden ${busy ? 'disabled' : ''}/></label></div>
+ <label class="field-label" for="title">Assessment title</label><input id="title" type="text" maxlength="100" value="${e(title)}" ${busy ? 'disabled' : ''}/>
+ <div class="label-row"><label class="field-label" for="notes">Study notes</label><span id="chars">${notes.length.toLocaleString()} characters · English</span></div><textarea id="notes" spellcheck="false" ${busy ? 'disabled' : ''}>${e(notes)}</textarea><div class="editor-hint">${icon('info')} Use one definition per line: <code>Term is a definition.</code> Group 4+ related concepts under a <code># Topic</code>.</div>
+ <div class="settings"><div><label for="count" class="field-label">Practice length</label><select id="count" ${busy ? 'disabled' : ''}><option value="6" ${requested === 6 ? 'selected' : ''}>6 questions · Quick check</option><option value="8" ${requested === 8 ? 'selected' : ''}>8 questions · Focus session</option><option value="12" ${requested === 12 ? 'selected' : ''}>12 questions · Deeper practice</option></select></div><div><label for="engine" class="field-label">Question engine</label><select id="engine" ${busy ? 'disabled' : ''}><option value="ai" ${mode === 'ai' ? 'selected' : ''}>Browser AI + source checks</option><option value="source" ${mode === 'source' ? 'selected' : ''}>Source practice · Instant</option></select></div></div>
  <div class="privacy-note">${icon('shield-check')} No account, API key, or upload to an AI service. AI runs on this device.</div>
- ${error?`<div class="notice error" role="alert">${icon('circle-alert')}<span>${e(error)}</span></div>`:''}
- ${busy?`<div class="generation" role="status" aria-live="polite"><span class="spinner"></span><div><b>Building thoughtful questions</b><p id="progress">${e(progress)}</p></div>${button('cancel','Cancel','quiet')}</div>`:''}
- <div class="card-actions"><small>${mode==='ai'?'First AI use downloads a model. Allow a few minutes.':'Instant questions use source templates, without generative AI.'}</small>${button('generate',`${icon('sparkles')} ${facts.length?'Rebuild assessment':'Build my assessment'} ${icon('arrow-right')}`,'primary',busy?'disabled':'')}</div></section>
- <aside class="right-rail"><div class="rail-label">A GOOD PLACE TO START</div><h2>Pick something to explore.</h2>${samples.map(s=>`<button class="sample ${s.color} ${selectedSample===s.id?'selected':''}" data-sample="${s.id}" ${busy?'disabled':''}><span class="sample-icon">${s.icon}</span><span class="sample-body"><small>${e(s.subject)}</small><b>${e(s.title)}</b><span>${e(s.description)}</span><em>${s.time} ${icon('arrow-up-right')}</em></span>${selectedSample===s.id?icon('circle-check','sample-check'):''}</button>`).join('')}
+ ${error ? `<div class="notice error" role="alert">${icon('circle-alert')}<span>${e(error)}</span></div>` : ''}
+ ${busy ? `<div class="generation" role="status" aria-live="polite"><span class="spinner"></span><div><b>Building thoughtful questions</b><p id="progress">${e(progress)}</p></div>${button('cancel', 'Cancel', 'quiet')}</div>` : ''}
+ <div class="card-actions"><small>${mode === 'ai' ? 'First AI use downloads a model. Allow a few minutes.' : 'Instant questions use source templates, without generative AI.'}</small>${button('generate', `${icon('sparkles')} ${facts.length ? 'Rebuild assessment' : 'Build my assessment'} ${icon('arrow-right')}`, 'primary', busy ? 'disabled' : '')}</div></section>
+ <aside class="right-rail"><div class="rail-label">A GOOD PLACE TO START</div><h2>Pick something to explore.</h2>${samples.map((s) => `<button class="sample ${s.color} ${selectedSample === s.id ? 'selected' : ''}" data-sample="${s.id}" ${busy ? 'disabled' : ''}><span class="sample-icon">${s.icon}</span><span class="sample-body"><small>${e(s.subject)}</small><b>${e(s.title)}</b><span>${e(s.description)}</span><em>${s.time} ${icon('arrow-up-right')}</em></span>${selectedSample === s.id ? icon('circle-check', 'sample-check') : ''}</button>`).join('')}
  <div class="adapt-card"><span class="mini-label">PRACTICE THAT MEETS YOU HERE</span><h3>Not too easy.<br/>Not out of reach.</h3><div class="level-preview"><span>Recall</span><span class="current">Connect</span><span>Challenge</span></div><p>Two correct answers raise the level. A missed answer brings it down. Your next topic follows what needs practice.</p><a href="#" id="policy-link">See the adaptation policy ${icon('arrow-right')}</a></div></aside></div>
- ${facts.length&&!busy?bank():''}`;}
-function bank(){const topics=[...new Set(facts.map(f=>f.topic))];return `<section class="card bank-card"><div class="card-heading"><div><div class="eyebrow">READY WHEN YOU ARE</div><h2>Your assessment is ready.</h2><p>${facts.length} concepts across ${topics.length} topic${topics.length===1?'':'s'} · ${aiCount} AI stems passed source checks.</p></div>${button('start',`Enter practice room ${icon('arrow-right')}`)}</div><div class="topic-pills">${topics.map(t=>pill(t)).join('')}${pill('Four distinct options per question','green-pill')}</div>${warnings.length?`<details><summary>${warnings.length} source note${warnings.length===1?'':'s'} to review</summary><ul>${warnings.map(w=>`<li>${e(w)}</li>`).join('')}</ul></details>`:''}<details><summary>Review source concepts and question provenance</summary><p class="muted">Automatic checks reduce obvious errors; they do not prove educational correctness. Review before classroom use. Difficulty labels are practice heuristics, not calibrated exam levels.</p>${facts.map(f=>`<div class="fact-row"><div>${pill(f.topic)}<h3>${e(f.term)}</h3><p>${e(f.definition)}</p><small>Source line ${f.line} · ${stems[f.id]&&validateStem(stems[f.id],f)?'AI question accepted':'Source question template'}</small></div><div class="stem-preview">${e(buildItem(f,facts,2,'preview',stems[f.id]).stem)}</div></div>`).join('')}</details></section>`;}
-function practice(){if(!session||!current)return empty('target','Your next discovery starts with a question.','Build an assessment from your notes, then practice at a pace that follows your answers.','Back to assessment');const a=analytics(session.responses),idx=session.responses.length+(feedback?0:1);return `<div class="practice-heading"><div class="eyebrow">YOUR FOCUS SESSION</div><h1>${e(title)}</h1><p>One question. A little more clarity.</p></div><div class="practice-grid"><section class="card question-card"><div class="question-meta"><span>QUESTION ${idx} <span class="muted">OF ${session.target}</span></span>${pill(levelNames[current.level],`level-${current.level}`)}</div><div class="progress-track"><span style="width:${100*session.responses.length/session.target}%"></span></div><div class="topic-line">${icon('layers-2')}${e(current.topic)} <span>· ${current.origin==='ai'?'AI stem · source checked':'Source-grounded question'}</span></div><h2 id="question">${e(current.stem)}</h2><fieldset aria-labelledby="question" class="options" ${feedback?'disabled':''}>${current.options.map((o,i)=>`<label class="option ${choice===o?'chosen':''} ${feedback&&o===current!.answer?'correct':''} ${feedback&&choice===o&&o!==current!.answer?'incorrect':''}"><input type="radio" name="answer" value="${i}" ${choice===o?'checked':''}/><span class="letter">${String.fromCharCode(65+i)}</span><span>${e(o)}</span>${feedback&&o===current!.answer?icon('check'):''}</label>`).join('')}</fieldset>
- ${!feedback?`<div class="confidence"><span>How certain do you feel?</span><div role="group" aria-label="Answer confidence">${['Guessing','Unsure','Sure'].map(c=>`<button class="confidence-btn ${confidence===c?'selected':''}" aria-pressed="${confidence===c}" data-confidence="${c}">${c}</button>`).join('')}</div></div><div class="quiz-actions"><small>Choose one answer to continue.</small>${button('check',`Check answer ${icon('arrow-right')}`,'primary',choice?'':'disabled')}</div>`:answerFeedback()}
- </section><aside class="practice-rail"><div class="card session-card"><span class="eyebrow">THIS SESSION</span><div class="mini-stats">${stat(String(a.total),'Answered')}${stat(a.total?`${a.accuracy}%`:'—','Accuracy')}</div><h3>Your adaptive path</h3><div class="path-levels">${([1,2,3] as Level[]).map(l=>`<span class="${session!.level===l?'current':''}">${levelNames[l]}</span>`).join('')}</div><p class="path-reason">${e(session.responses.at(-1)?.reason??'Start at Connect. Your answers will guide the next step.')}</p><div class="rail-divider"></div>${icon('leaf')} <b>Progress, not a verdict.</b><p>A short practice set is a snapshot. Use it to decide what to revisit, not to measure your ability.</p>${button('finish','Finish & view insights','secondary',a.total?'':'disabled')}</div></aside></div>`;}
-function answerFeedback(){const r=session!.responses.at(-1)!;return `<div class="feedback ${r.correct?'positive':'negative'}" role="status"><h3>${icon(r.correct?'circle-check':'lightbulb')}${r.correct?'That’s right. Keep building.':'A useful moment to learn.'}</h3><p>${e(current!.rationale)}</p><details><summary>Why the other options don’t fit</summary>${current!.distractors.map(d=>`<p><b>${e(d.option)}</b> — ${e(d.why)}</p>`).join('')}</details><div class="evidence">${icon('quote')} Source line ${current!.line}: ${e(current!.source)}</div></div><div class="quiz-actions"><span class="next-level">Next: <b>${levelNames[session!.level]}</b></span>${button('next',`${session!.responses.length>=session!.target?'View my insights':'Next question'} ${icon('arrow-right')}`)}</div>`;}
-function insights(){const rs=session?.responses??[],a=analytics(rs);if(!rs.length)return empty('chart-no-axes-combined','A clearer picture is on its way.','Answer a few questions to see topic strengths, concepts to revisit, and how your practice level changes.','Create my assessment');const weakest=[...a.topics].sort((x,y)=>x.correct/x.total-y.correct/y.total)[0];return `<div class="page-heading"><div><div class="eyebrow">SMALL STEPS, VISIBLE PROGRESS</div><h1>Here’s what your practice revealed.</h1><p>${e(title)} · ${a.total} of ${session!.target} questions answered</p></div><div class="export-actions">${button('export-json',`${icon('download')} JSON report`,'secondary')}${button('export-csv','CSV','secondary')}</div></div><section class="insight-stats card">${stat(`${a.accuracy}%`,'Session accuracy',`${a.correct} of ${a.total} correct`)}${stat(String(a.total),'Concepts practiced','No repeated concepts')}${stat(`${Math.floor(a.seconds/60)}m ${a.seconds%60}s`,'Active answer time','Speed does not affect grading')}${stat(String(a.confidentMisses),'Confident misses','Good places to revisit')}</section><div class="insights-grid"><section class="card"><div class="card-heading"><div><h2>Find your next focus.</h2><p>Accuracy by topic, with the number of questions behind it.</p></div>${icon('chart-bar')}</div>${a.topics.map(t=>`<div class="topic-result"><div><b>${e(t.topic)}</b><span>${t.correct}/${t.total} correct · ${Math.round(100*t.correct/t.total)}%</span></div><div class="topic-bar"><span style="width:${100*t.correct/t.total}%"></span></div><small>${t.correct===t.total?'Keep practicing with new questions to check retention.':'Revisit the missed concepts below, then try a fresh assessment.'}</small></div>`).join('')}<p class="measurement-note">A short session is uncertain: the 95% Wilson interval for this session’s accuracy is ${a.interval[0]}–${a.interval[1]}%. This is not a validated mastery score.</p></section><section class="card focus-card"><span class="eyebrow">YOUR NEXT SMALL STEP</span><div class="focus-icon">${icon('sprout')}</div><h2>${a.correct===a.total?'Try a little more depth.':`Give ${e(weakest.topic)} another look.`}</h2><p>${a.correct===a.total?'You answered this set correctly. Revisit it later or add new material to check what sticks.':'Read the source explanations for your missed answers. Explain each concept in your own words before trying again.'}</p>${button('revise',`Revise missed concepts ${icon('arrow-right')}`,'primary',rs.some(r=>!r.correct)?'':'disabled')}${button('again','Build another assessment','quiet')}</section></div>
- <section class="card"><div class="card-heading"><div><h2>Your difficulty journey</h2><p>Each step shows the level you answered at. Select a question below to see why it changed.</p></div>${pill('Transparent adaptation')}</div><div class="journey-chart" role="img" aria-label="Difficulty journey: ${rs.map((r,i)=>`question ${i+1}: ${levelNames[r.before]}, ${r.correct?'correct':'incorrect'}`).join('; ')}">${rs.map((r,i)=>`<div class="chart-column"><span class="chart-level">${levelNames[r.before]}</span><div class="chart-bar ${r.correct?'':'miss'}" style="height:${r.before*28+12}px">${icon(r.correct?'check':'x')}</div><small>Q${i+1}</small></div>`).join('')}</div></section><section class="card review-card" id="review"><div class="card-heading"><div><h2>Review. Understand. Move forward.</h2><p>Your answers, the source evidence, and a reason for every adjustment.</p></div></div>${rs.map((r,i)=>`<details class="review-row" ${!r.correct?'open':''}><summary><span class="result-dot ${r.correct?'right':'wrong'}">${icon(r.correct?'check':'x')}</span><span><small>QUESTION ${i+1} · ${e(r.item.topic)} · ${levelNames[r.before]}</small><b>${e(r.item.stem)}</b></span>${pill(r.correct?'Correct':'Revisit',r.correct?'green-pill':'orange-pill')}</summary><div class="review-content"><p>Your answer: <b>${e(r.selected)}</b> · Confidence: ${e(r.confidence)}</p><p>Correct answer: <b>${e(r.item.answer)}</b></p><blockquote>${e(r.item.source)}<cite>Source line ${r.item.line}</cite></blockquote><p>${e(r.reason)} Next level: <b>${levelNames[r.after]}</b>.</p></div></details>`).join('')}</section>`;}
-function empty(i:string,h:string,p:string,b:string){return `<section class="empty card"><div>${icon(i)}</div><h1>${h}</h1><p>${p}</p>${button('back-studio',b)}</section>`;}
-function guide(){return `<div class="page-heading"><div><div class="eyebrow">A LITTLE TRANSPARENCY</div><h1>Practice you can understand.</h1><p>What BloomPath does, what it checks, and where it needs your judgment.</p></div></div><section class="card guide"><h2>1. Start with clear source material</h2><p>Add English definitions, one per line, with 4 or more related terms per topic. Import .txt or .md files up to 50 KB. For PDFs and Word documents, paste the relevant definitions. This prototype does not parse arbitrary textbook pages or execute uploaded code.</p><h2>2. Generate, then check</h2><p>The AI engine uses a quantized, answer-aware T5 model in a browser worker. It writes stems using a highlighted answer and its source definition. A conservative filter rejects answer leaks, unrelated words, invalid question forms, and weak source overlap. Rejected stems use a clearly labeled source question. Answers and distractors come from your notes, not the model’s memory.</p><p>Distinct options, same-topic distractors, duplicate concepts and conflicting definitions are checked. These are automatic safeguards, not proof of one correct interpretation. Source errors, overlapping definitions, synonyms, and model mistakes remain possible. Review the assessment before classroom use.</p><h2>3. Adapt with an explicit policy</h2><p>Begin at Connect (level 2). Two consecutive correct answers raise the next question by one level and reset the streak. An incorrect answer lowers the next question by one level and resets the streak. Levels remain between 1 and 3. Speed and confidence are recorded for reflection and never change your grade.</p><p>Recall asks you to identify a definition from a term and uses less similar distractors. Connect asks for the term from a description. Challenge asks you to compare term-description pairs; distractors pair a related term with another concept's definition. These labels are heuristics; Challenge does not claim higher-order reasoning or calibrated exam difficulty.</p><p>Choose the weakest topic among unseen concepts using a smoothed accuracy estimate: (correct + 1) / (answered + 2). Unseen topics start at 0.5. No concept repeats in a session. Confidence helps highlight confident mistakes; it cannot prove whether a correct answer was a guess.</p><h2>4. Keep the evidence with the result</h2><p>See line-level source evidence, explanations of distractors, topic accuracy, confidence, and the exact reason for each adaptation. Download JSON or CSV for your own review. A short assessment offers limited evidence, so we show sample counts and uncertainty rather than claiming a validated mastery score.</p><h2>Your privacy</h2><p>Notes and answers stay in this tab’s memory. Reloading clears them. The model and runtime files download from this site; no notes are sent to an inference API. There is no account, analytics tracker, server database, API key, or paid AI service. Model downloads require a connection on first use.</p>${button('back-studio',`Start creating ${icon('arrow-right')}`)}</section>`;}
-function bind(){
- document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view as View;shell();focusMain();});
- on('brand',()=>{view='studio';shell();focusMain();});on('back-studio',()=>{view='studio';shell();focusMain();});on('policy-link',()=>{view='guide';shell();focusMain();});
- document.querySelectorAll<HTMLButtonElement>('[data-sample]').forEach(b=>b.onclick=()=>{const s=samples.find(s=>s.id===b.dataset.sample)!;notes=s.text;title=s.title;selectedSample=s.id;invalidate();shell();});
- const n=document.querySelector<HTMLTextAreaElement>('#notes');if(n)n.oninput=()=>{notes=n.value;selectedSample='';invalidate();document.querySelector('.bank-card')?.remove();document.querySelector('#chars')!.textContent=`${notes.length.toLocaleString()} characters · English`;};
- const t=document.querySelector<HTMLInputElement>('#title');if(t)t.oninput=()=>{title=t.value;};
- const engine=document.querySelector<HTMLSelectElement>('#engine');if(engine)engine.onchange=()=>{mode=engine.value;invalidate();shell();};
- const count=document.querySelector<HTMLSelectElement>('#count');if(count)count.onchange=()=>{requested=Number(count.value);};
- const file=document.querySelector<HTMLInputElement>('#file');if(file)file.onchange=async()=>{const f=file.files?.[0];if(!f)return;try{if(!/\.(txt|md)$/i.test(f.name)||f.size>50000)throw new Error('Import a .txt or .md file smaller than 50 KB.');notes=await f.text();title=f.name.replace(/\.(txt|md)$/i,'');selectedSample='';invalidate();error='';}catch(err){error=(err as Error).message;}shell();};
- on('generate',generate);on('cancel',()=>{worker?.terminate();worker=null;busy=false;progress='';error='AI generation canceled. You can retry or choose instant source practice.';shell();});on('start',start);
- document.querySelectorAll<HTMLInputElement>('input[name="answer"]').forEach(r=>r.onchange=()=>{choice=current!.options[Number(r.value)];shell();});
- document.querySelectorAll<HTMLButtonElement>('[data-confidence]').forEach(b=>b.onclick=()=>{confidence=b.dataset.confidence!;shell();});
- on('check',()=>{session=grade(session!,current!,choice,confidence,(Date.now()-started)/1000);feedback=true;shell();});
- on('next',()=>{if(session!.responses.length>=session!.target){view='insights';current=null;}else next();shell();focusMain();});on('finish',()=>{view='insights';shell();focusMain();});
- on('again',()=>{view='studio';shell();focusMain();});on('revise',()=>document.querySelector('#review')?.scrollIntoView({behavior:'smooth'}));
- on('export-json',()=>download('bloompath-session.json',JSON.stringify({schemaVersion:1,title,engine:aiCount?'browser-t5-with-source-checks':'source-templates',contentHash:hash(notes),policy:'two-correct-up-one-wrong-down-v1',...analytics(session!.responses),responses:session!.responses},null,2),'application/json'));
- on('export-csv',()=>download('bloompath-session.csv',toCSV(session!.responses),'text/csv;charset=utf-8'));
+ ${facts.length && !busy ? bank() : ''}`;
 }
-function focusMain(){window.scrollTo({top:0,behavior:'instant'});document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});}
-function on(id:string,fn:()=>void){const el=document.getElementById(id);if(el)el.onclick=(ev)=>{ev.preventDefault();fn();};}
-function invalidate(){facts=[];stems={};warnings=[];session=null;current=null;aiCount=0;error='';}
-let requested=8;
-function generate(){
- try{requested=Number((document.querySelector('#count') as HTMLSelectElement).value);const parsed=parseContent(notes);facts=parsed.facts;warnings=parsed.warnings;stems={};aiCount=0;session=null;current=null;error='';if(requested>facts.length)warnings.push(`Practice length reduced to ${facts.length} so concepts do not repeat.`);
-  if(mode==='source'){shell();document.querySelector('.bank-card')?.scrollIntoView({behavior:'smooth',block:'center'});return;}
-  busy=true;progress='Loading the local question-generation model…';shell();worker=new Worker(new URL('./ai.worker.ts',import.meta.url),{type:'module'});
-  worker.onmessage=(ev)=>{const m=ev.data;if(m.type==='progress'){progress=m.message;const el=document.querySelector('#progress');if(el)el.textContent=progress;}if(m.type==='done'){stems=m.stems;aiCount=facts.filter(f=>validateStem(stems[f.id]??'',f)).length;busy=false;worker?.terminate();worker=null;shell();document.querySelector('.bank-card')?.scrollIntoView({behavior:'smooth',block:'center'});}if(m.type==='error'){busy=false;error=m.message;worker?.terminate();worker=null;facts=[];shell();}};
-  worker.onerror=()=>{busy=false;error='The AI worker could not start. Choose source practice or retry in a recent browser.';worker?.terminate();worker=null;facts=[];shell();};
-  worker.postMessage({facts});
- }catch(err){facts=[];error=(err as Error).message;shell();}
+function bank() {
+  const topics = [...new Set(facts.map((f) => f.topic))];
+  return `<section class="card bank-card"><div class="card-heading"><div><div class="eyebrow">READY WHEN YOU ARE</div><h2>Your assessment is ready.</h2><p>${facts.length} concepts across ${topics.length} topic${topics.length === 1 ? '' : 's'} · ${aiCount} AI stems passed source checks.</p></div>${button('start', `Enter practice room ${icon('arrow-right')}`)}</div><div class="topic-pills">${topics.map((t) => pill(t)).join('')}${pill('Four distinct options per question', 'green-pill')}</div>${warnings.length ? `<details><summary>${warnings.length} source note${warnings.length === 1 ? '' : 's'} to review</summary><ul>${warnings.map((w) => `<li>${e(w)}</li>`).join('')}</ul></details>` : ''}<details><summary>Review source concepts and question provenance</summary><p class="muted">Automatic checks reduce obvious errors; they do not prove educational correctness. Review before classroom use. Difficulty labels are practice heuristics, not calibrated exam levels.</p>${facts.map((f) => `<div class="fact-row"><div>${pill(f.topic)}<h3>${e(f.term)}</h3><p>${e(f.definition)}</p><small>Source line ${f.line} · ${stems[f.id] && validateStem(stems[f.id], f) ? 'AI question accepted' : 'Source question template'}</small></div><div class="stem-preview">${e(buildItem(f, facts, 2, 'preview', stems[f.id]).stem)}</div></div>`).join('')}</details></section>`;
 }
-function start(){session=newSession(Math.min(requested,facts.length));view='practice';next();shell();window.scrollTo({top:0,behavior:'smooth'});}
-function next(){const f=chooseFact(session!,facts);if(!f){view='insights';current=null;return;}current=buildItem(f,facts,session!.level,String(session!.responses.length)+hash(notes),stems[f.id]);choice='';confidence='Unsure';feedback=false;started=Date.now();}
-function download(name:string,text:string,type:string){const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function practice() {
+  if (!session || !current)
+    return empty(
+      'target',
+      'Your next discovery starts with a question.',
+      'Build an assessment from your notes, then practice at a pace that follows your answers.',
+      'Back to assessment',
+    );
+  const a = analytics(session.responses),
+    idx = session.responses.length + (feedback ? 0 : 1);
+  return `<div class="practice-heading"><div class="eyebrow">YOUR FOCUS SESSION</div><h1>${e(title)}</h1><p>One question. A little more clarity.</p></div><div class="practice-grid"><section class="card question-card"><div class="question-meta"><span>QUESTION ${idx} <span class="muted">OF ${session.target}</span></span>${pill(levelNames[current.level], `level-${current.level}`)}</div><div class="progress-track"><span style="width:${(100 * session.responses.length) / session.target}%"></span></div><div class="topic-line">${icon('layers-2')}${e(current.topic)} <span>· ${current.origin === 'ai' ? 'AI stem · source checked' : 'Source-grounded question'}</span></div><h2 id="question">${e(current.stem)}</h2><fieldset aria-labelledby="question" class="options" ${feedback ? 'disabled' : ''}>${current.options.map((o, i) => `<label class="option ${choice === o ? 'chosen' : ''} ${feedback && o === current!.answer ? 'correct' : ''} ${feedback && choice === o && o !== current!.answer ? 'incorrect' : ''}"><input type="radio" name="answer" value="${i}" ${choice === o ? 'checked' : ''}/><span class="letter">${String.fromCharCode(65 + i)}</span><span>${e(o)}</span>${feedback && o === current!.answer ? icon('check') : ''}</label>`).join('')}</fieldset>
+ ${!feedback ? `<div class="confidence"><span>How certain do you feel?</span><div role="group" aria-label="Answer confidence">${['Guessing', 'Unsure', 'Sure'].map((c) => `<button class="confidence-btn ${confidence === c ? 'selected' : ''}" aria-pressed="${confidence === c}" data-confidence="${c}">${c}</button>`).join('')}</div></div><div class="quiz-actions"><small>Choose one answer to continue.</small>${button('check', `Check answer ${icon('arrow-right')}`, 'primary', choice ? '' : 'disabled')}</div>` : answerFeedback()}
+ </section><aside class="practice-rail"><div class="card session-card"><span class="eyebrow">THIS SESSION</span><div class="mini-stats">${stat(String(a.total), 'Answered')}${stat(a.total ? `${a.accuracy}%` : '—', 'Accuracy')}</div><h3>Your adaptive path</h3><div class="path-levels">${([1, 2, 3] as Level[]).map((l) => `<span class="${session!.level === l ? 'current' : ''}">${levelNames[l]}</span>`).join('')}</div><p class="path-reason">${e(session.responses.at(-1)?.reason ?? 'Start at Connect. Your answers will guide the next step.')}</p><div class="rail-divider"></div>${icon('leaf')} <b>Progress, not a verdict.</b><p>A short practice set is a snapshot. Use it to decide what to revisit, not to measure your ability.</p>${button('finish', 'Finish & view insights', 'secondary', a.total ? '' : 'disabled')}</div></aside></div>`;
+}
+function answerFeedback() {
+  const r = session!.responses.at(-1)!;
+  return `<div class="feedback ${r.correct ? 'positive' : 'negative'}" role="status"><h3>${icon(r.correct ? 'circle-check' : 'lightbulb')}${r.correct ? 'That’s right. Keep building.' : 'A useful moment to learn.'}</h3><p>${e(current!.rationale)}</p><details><summary>Why the other options don’t fit</summary>${current!.distractors.map((d) => `<p><b>${e(d.option)}</b> — ${e(d.why)}</p>`).join('')}</details><div class="evidence">${icon('quote')} Source line ${current!.line}: ${e(current!.source)}</div></div><div class="quiz-actions"><span class="next-level">Next: <b>${levelNames[session!.level]}</b></span>${button('next', `${session!.responses.length >= session!.target ? 'View my insights' : 'Next question'} ${icon('arrow-right')}`)}</div>`;
+}
+function insights() {
+  const rs = session?.responses ?? [],
+    a = analytics(rs);
+  if (!rs.length)
+    return empty(
+      'chart-no-axes-combined',
+      'A clearer picture is on its way.',
+      'Answer a few questions to see topic strengths, concepts to revisit, and how your practice level changes.',
+      'Create my assessment',
+    );
+  const weakest = [...a.topics].sort((x, y) => x.correct / x.total - y.correct / y.total)[0];
+  return `<div class="page-heading"><div><div class="eyebrow">SMALL STEPS, VISIBLE PROGRESS</div><h1>Here’s what your practice revealed.</h1><p>${e(title)} · ${a.total} of ${session!.target} questions answered</p></div><div class="export-actions">${button('export-json', `${icon('download')} JSON report`, 'secondary')}${button('export-csv', 'CSV', 'secondary')}</div></div><section class="insight-stats card">${stat(`${a.accuracy}%`, 'Session accuracy', `${a.correct} of ${a.total} correct`)}${stat(String(a.total), 'Concepts practiced', 'No repeated concepts')}${stat(`${Math.floor(a.seconds / 60)}m ${a.seconds % 60}s`, 'Recorded answer time', 'Speed does not affect grading')}${stat(String(a.confidentMisses), 'Confident misses', 'Good places to revisit')}</section><div class="insights-grid"><section class="card"><div class="card-heading"><div><h2>Find your next focus.</h2><p>Accuracy by topic, with the number of questions behind it.</p></div>${icon('chart-bar')}</div>${a.topics.map((t) => `<div class="topic-result"><div><b>${e(t.topic)}</b><span>${t.correct}/${t.total} correct · ${Math.round((100 * t.correct) / t.total)}%</span></div><div class="topic-bar"><span style="width:${(100 * t.correct) / t.total}%"></span></div><small>${t.correct === t.total ? 'Keep practicing with new questions to check retention.' : 'Revisit the missed concepts below, then try a fresh assessment.'}</small></div>`).join('')}<p class="measurement-note">A short session is uncertain: the 95% Wilson interval for this session’s accuracy is ${a.interval[0]}–${a.interval[1]}%. This is not a validated mastery score.</p></section><section class="card focus-card"><span class="eyebrow">YOUR NEXT SMALL STEP</span><div class="focus-icon">${icon('sprout')}</div><h2>${a.correct === a.total ? 'Try a little more depth.' : `Give ${e(weakest.topic)} another look.`}</h2><p>${a.correct === a.total ? 'You answered this set correctly. Revisit it later or add new material to check what sticks.' : 'Read the source explanations for your missed answers. Explain each concept in your own words before trying again.'}</p>${button('revise', `Revise missed concepts ${icon('arrow-right')}`, 'primary', rs.some((r) => !r.correct) ? '' : 'disabled')}${button('again', 'Build another assessment', 'quiet')}</section></div>
+ <section class="card"><div class="card-heading"><div><h2>Your difficulty journey</h2><p>Each step shows the level you answered at. Select a question below to see why it changed.</p></div>${pill('Transparent adaptation')}</div><div class="journey-chart" role="img" aria-label="Difficulty journey: ${rs.map((r, i) => `question ${i + 1}: ${levelNames[r.before]}, ${r.correct ? 'correct' : 'incorrect'}`).join('; ')}">${rs.map((r, i) => `<div class="chart-column"><span class="chart-level">${levelNames[r.before]}</span><div class="chart-bar ${r.correct ? '' : 'miss'}" style="height:${r.before * 28 + 12}px">${icon(r.correct ? 'check' : 'x')}</div><small>Q${i + 1}</small></div>`).join('')}</div></section><section class="card review-card" id="review"><div class="card-heading"><div><h2>Review. Understand. Move forward.</h2><p>Your answers, the source evidence, and a reason for every adjustment.</p></div></div>${rs.map((r, i) => `<details class="review-row" ${!r.correct ? 'open' : ''}><summary><span class="result-dot ${r.correct ? 'right' : 'wrong'}">${icon(r.correct ? 'check' : 'x')}</span><span><small>QUESTION ${i + 1} · ${e(r.item.topic)} · ${levelNames[r.before]}</small><b>${e(r.item.stem)}</b></span>${pill(r.correct ? 'Correct' : 'Revisit', r.correct ? 'green-pill' : 'orange-pill')}</summary><div class="review-content"><p>Your answer: <b>${e(r.selected)}</b> · Confidence: ${e(r.confidence)}</p><p>Correct answer: <b>${e(r.item.answer)}</b></p><blockquote>${e(r.item.source)}<cite>Source line ${r.item.line}</cite></blockquote><p>${e(r.reason)} Next level: <b>${levelNames[r.after]}</b>.</p></div></details>`).join('')}</section>`;
+}
+function empty(i: string, h: string, p: string, b: string) {
+  return `<section class="empty card"><div>${icon(i)}</div><h1>${h}</h1><p>${p}</p>${button('back-studio', b)}</section>`;
+}
+function guide() {
+  return `<div class="page-heading"><div><div class="eyebrow">A LITTLE TRANSPARENCY</div><h1>Practice you can understand.</h1><p>What BloomPath does, what it checks, and where it needs your judgment.</p></div></div><section class="card guide"><h2>1. Start with clear source material</h2><p>Add English definitions, one per line, with 4 or more related terms per topic. Import .txt or .md files up to 50 KB. For PDFs and Word documents, paste the relevant definitions. This prototype does not parse arbitrary textbook pages or execute uploaded code.</p><h2>2. Generate, then check</h2><p>The AI engine uses a quantized, answer-aware T5 model in a browser worker. It writes stems using a highlighted answer and its source definition. A conservative filter rejects answer leaks, unrelated words, invalid question forms, and weak source overlap. Rejected stems use a clearly labeled source question. Answers and distractors come from your notes, not the model’s memory.</p><p>Distinct options, same-topic distractors, duplicate concepts and conflicting definitions are checked. These are automatic safeguards, not proof of one correct interpretation. Source errors, overlapping definitions, synonyms, and model mistakes remain possible. Review the assessment before classroom use.</p><h2>3. Adapt with an explicit policy</h2><p>Begin at Connect (level 2). Two consecutive correct answers raise the next question by one level and reset the streak. An incorrect answer lowers the next question by one level and resets the streak. Levels remain between 1 and 3. Speed and confidence are recorded for reflection and never change your grade.</p><p>Recall asks you to identify a definition from a term and uses less similar distractors. Connect asks for the term from a description. Challenge asks you to compare term-description pairs; distractors pair a related term with another concept's definition. These labels are heuristics; Challenge does not claim higher-order reasoning or calibrated exam difficulty.</p><p>Choose the weakest topic among unseen concepts using a smoothed accuracy estimate: (correct + 1) / (answered + 2). Unseen topics start at 0.5. No concept repeats in a session. Confidence helps highlight confident mistakes; it cannot prove whether a correct answer was a guess.</p><h2>4. Keep the evidence with the result</h2><p>See line-level source evidence, explanations of distractors, topic accuracy, confidence, and the exact reason for each adaptation. Download JSON or CSV for your own review. A short assessment offers limited evidence, so we show sample counts and uncertainty rather than claiming a validated mastery score.</p><h2>Your privacy</h2><p>Notes and answers stay in this tab’s memory. Reloading clears them. The model and runtime files download from this site; no notes are sent to an inference API. There is no account, analytics tracker, server database, API key, or paid AI service. Model downloads require a connection on first use.</p>${button('back-studio', `Start creating ${icon('arrow-right')}`)}</section>`;
+}
+function bind() {
+  document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        view = b.dataset.view as View;
+        shell();
+        focusMain();
+      }),
+  );
+  on('brand', () => {
+    view = 'studio';
+    shell();
+    focusMain();
+  });
+  on('back-studio', () => {
+    view = 'studio';
+    shell();
+    focusMain();
+  });
+  on('policy-link', () => {
+    view = 'guide';
+    shell();
+    focusMain();
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-sample]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        const s = samples.find((s) => s.id === b.dataset.sample)!;
+        notes = s.text;
+        title = s.title;
+        selectedSample = s.id;
+        invalidate();
+        shell();
+      }),
+  );
+  const n = document.querySelector<HTMLTextAreaElement>('#notes');
+  if (n)
+    n.oninput = () => {
+      notes = n.value;
+      selectedSample = '';
+      invalidate();
+      document.querySelector('.bank-card')?.remove();
+      document.querySelector('#chars')!.textContent =
+        `${notes.length.toLocaleString()} characters · English`;
+    };
+  const t = document.querySelector<HTMLInputElement>('#title');
+  if (t)
+    t.oninput = () => {
+      title = t.value;
+    };
+  const engine = document.querySelector<HTMLSelectElement>('#engine');
+  if (engine)
+    engine.onchange = () => {
+      mode = engine.value;
+      invalidate();
+      shell();
+    };
+  const count = document.querySelector<HTMLSelectElement>('#count');
+  if (count)
+    count.onchange = () => {
+      requested = Number(count.value);
+    };
+  const file = document.querySelector<HTMLInputElement>('#file');
+  if (file)
+    file.onchange = async () => {
+      const f = file.files?.[0];
+      if (!f) return;
+      try {
+        if (!/\.(txt|md)$/i.test(f.name) || f.size > 50000)
+          throw new Error('Import a .txt or .md file smaller than 50 KB.');
+        notes = await f.text();
+        title = f.name.replace(/\.(txt|md)$/i, '');
+        selectedSample = '';
+        invalidate();
+        error = '';
+      } catch (err) {
+        error = (err as Error).message;
+      }
+      shell();
+    };
+  on('generate', generate);
+  on('cancel', () => {
+    worker?.terminate();
+    worker = null;
+    busy = false;
+    progress = '';
+    error = 'AI generation canceled. You can retry or choose instant source practice.';
+    shell();
+  });
+  on('start', start);
+  document.querySelectorAll<HTMLInputElement>('input[name="answer"]').forEach(
+    (r) =>
+      (r.onchange = () => {
+        choice = current!.options[Number(r.value)];
+        shell();
+        document
+          .querySelector<HTMLInputElement>('input[name="answer"]:checked')
+          ?.focus({ preventScroll: true });
+      }),
+  );
+  document.querySelectorAll<HTMLButtonElement>('[data-confidence]').forEach(
+    (b) =>
+      (b.onclick = () => {
+        confidence = b.dataset.confidence!;
+        shell();
+        document.querySelectorAll<HTMLButtonElement>('[data-confidence]').forEach((el) => {
+          if (el.dataset.confidence === confidence) el.focus({ preventScroll: true });
+        });
+      }),
+  );
+  on('check', () => {
+    session = grade(session!, current!, choice, confidence, (Date.now() - started) / 1000);
+    feedback = true;
+    shell();
+  });
+  on('next', () => {
+    if (session!.responses.length >= session!.target) {
+      view = 'insights';
+      current = null;
+    } else next();
+    shell();
+    focusMain();
+  });
+  on('finish', () => {
+    view = 'insights';
+    shell();
+    focusMain();
+  });
+  on('again', () => {
+    view = 'studio';
+    shell();
+    focusMain();
+  });
+  on('revise', () => document.querySelector('#review')?.scrollIntoView({ behavior: 'smooth' }));
+  on('export-json', () =>
+    download(
+      'bloompath-session.json',
+      JSON.stringify(
+        {
+          schemaVersion: 1,
+          title,
+          engine: aiCount ? 'browser-t5-with-source-checks' : 'source-templates',
+          contentHash: hash(notes),
+          policy: 'two-correct-up-one-wrong-down-v1',
+          ...analytics(session!.responses),
+          responses: session!.responses,
+        },
+        null,
+        2,
+      ),
+      'application/json',
+    ),
+  );
+  on('export-csv', () =>
+    download('bloompath-session.csv', toCSV(session!.responses), 'text/csv;charset=utf-8'),
+  );
+}
+function focusMain() {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  document.querySelector<HTMLElement>('#main')?.focus({ preventScroll: true });
+}
+function on(id: string, fn: () => void) {
+  const el = document.getElementById(id);
+  if (el)
+    el.onclick = (ev) => {
+      ev.preventDefault();
+      fn();
+    };
+}
+function invalidate() {
+  facts = [];
+  stems = {};
+  warnings = [];
+  session = null;
+  current = null;
+  aiCount = 0;
+  error = '';
+}
+let requested = 8;
+function generate() {
+  try {
+    requested = Number((document.querySelector('#count') as HTMLSelectElement).value);
+    const parsed = parseContent(notes);
+    facts = parsed.facts;
+    warnings = parsed.warnings;
+    stems = {};
+    aiCount = 0;
+    session = null;
+    current = null;
+    error = '';
+    if (requested > facts.length)
+      warnings.push(`Practice length reduced to ${facts.length} so concepts do not repeat.`);
+    if (mode === 'source') {
+      shell();
+      document.querySelector('.bank-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    busy = true;
+    progress = 'Loading the local question-generation model…';
+    shell();
+    worker = new Worker(new URL('./ai.worker.ts', import.meta.url), { type: 'module' });
+    worker.onmessage = (ev) => {
+      const m = ev.data;
+      if (m.type === 'progress') {
+        progress = m.message;
+        const el = document.querySelector('#progress');
+        if (el) el.textContent = progress;
+      }
+      if (m.type === 'done') {
+        stems = m.stems;
+        aiCount = facts.filter((f) => validateStem(stems[f.id] ?? '', f)).length;
+        busy = false;
+        worker?.terminate();
+        worker = null;
+        shell();
+        document
+          .querySelector('.bank-card')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (m.type === 'error') {
+        busy = false;
+        error = m.message;
+        worker?.terminate();
+        worker = null;
+        facts = [];
+        shell();
+      }
+    };
+    worker.onerror = () => {
+      busy = false;
+      error = 'The AI worker could not start. Choose source practice or retry in a recent browser.';
+      worker?.terminate();
+      worker = null;
+      facts = [];
+      shell();
+    };
+    worker.postMessage({ facts });
+  } catch (err) {
+    facts = [];
+    error = (err as Error).message;
+    shell();
+  }
+}
+function start() {
+  session = newSession(Math.min(requested, facts.length));
+  view = 'practice';
+  next();
+  shell();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function next() {
+  const f = chooseFact(session!, facts);
+  if (!f) {
+    view = 'insights';
+    current = null;
+    return;
+  }
+  current = buildItem(
+    f,
+    facts,
+    session!.level,
+    String(session!.responses.length) + hash(notes),
+    stems[f.id],
+  );
+  choice = '';
+  confidence = 'Unsure';
+  feedback = false;
+  started = Date.now();
+}
+function download(name: string, text: string, type: string) {
+  const url = URL.createObjectURL(new Blob([text], { type })),
+    a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 shell();

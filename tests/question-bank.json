@@ -1,11 +1,63 @@
 {
   "provenance": "Adapted from the user-supplied Personalized_MCQ_Generator_Question_Bank.docx. Code line breaks restored for readability. These are evaluation references, not AI-generated output.",
   "questions": [
-    {"id":"python-precedence","difficulty":"easy","question":"What is the output of print(3 * 2 ** 2)?","options":["36","12","24","18"],"answer":"12","explanation":"Exponentiation precedes multiplication: 2 ** 2 = 4, then 3 * 4 = 12."},
-    {"id":"python-set","difficulty":"easy","question":"Which Python data structure automatically eliminates duplicate elements?","options":["List","Tuple","Set","Dictionary"],"answer":"Set","explanation":"Sets store unique elements; the other collection types do not generally deduplicate their elements."},
-    {"id":"python-aliasing","difficulty":"medium","question":"What is printed by this code?\na = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)","options":["[1, 2, 3]","[1, 2, 3, 4]","[4]","An error occurs"],"answer":"[1, 2, 3, 4]","explanation":"a and b refer to the same mutable list."},
-    {"id":"binary-search","difficulty":"medium","question":"An algorithm repeatedly halves the remaining search space in a sorted array. What is its worst-case time complexity?","options":["O(n)","O(n²)","O(log n)","O(1)"],"answer":"O(log n)","explanation":"The number of halvings needed grows logarithmically with input length."},
-    {"id":"mutable-default","difficulty":"hard","question":"A function uses def add_item(x, items=[]): and appends x to items. Why might separate calls unexpectedly share values?","options":["Python recreates the list on every call","Default arguments are evaluated once when the function is defined","Lists cannot be passed as arguments","The append method is asynchronous"],"answer":"Default arguments are evaluated once when the function is defined","explanation":"The default list is created at function definition time and reused on calls that omit items."},
-    {"id":"sliding-window","difficulty":"hard","question":"You must find the length of the longest substring without repeating characters in a string of 100,000 characters. Which approach is most appropriate?","options":["Generate all substrings","Sort the characters first","Sliding window with a hash map","Compare every pair of substrings"],"answer":"Sliding window with a hash map","explanation":"A sliding window using last-seen positions achieves O(n) time under standard constant-time hash lookup assumptions."}
+    {
+      "id": "python-precedence",
+      "difficulty": "easy",
+      "question": "What is the output of print(3 * 2 ** 2)?",
+      "options": ["36", "12", "24", "18"],
+      "answer": "12",
+      "explanation": "Exponentiation precedes multiplication: 2 ** 2 = 4, then 3 * 4 = 12."
+    },
+    {
+      "id": "python-set",
+      "difficulty": "easy",
+      "question": "Which Python data structure automatically eliminates duplicate elements?",
+      "options": ["List", "Tuple", "Set", "Dictionary"],
+      "answer": "Set",
+      "explanation": "Sets store unique elements; the other collection types do not generally deduplicate their elements."
+    },
+    {
+      "id": "python-aliasing",
+      "difficulty": "medium",
+      "question": "What is printed by this code?\na = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+      "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "[4]", "An error occurs"],
+      "answer": "[1, 2, 3, 4]",
+      "explanation": "a and b refer to the same mutable list."
+    },
+    {
+      "id": "binary-search",
+      "difficulty": "medium",
+      "question": "An algorithm repeatedly halves the remaining search space in a sorted array. What is its worst-case time complexity?",
+      "options": ["O(n)", "O(n²)", "O(log n)", "O(1)"],
+      "answer": "O(log n)",
+      "explanation": "The number of halvings needed grows logarithmically with input length."
+    },
+    {
+      "id": "mutable-default",
+      "difficulty": "hard",
+      "question": "A function uses def add_item(x, items=[]): and appends x to items. Why might separate calls unexpectedly share values?",
+      "options": [
+        "Python recreates the list on every call",
+        "Default arguments are evaluated once when the function is defined",
+        "Lists cannot be passed as arguments",
+        "The append method is asynchronous"
+      ],
+      "answer": "Default arguments are evaluated once when the function is defined",
+      "explanation": "The default list is created at function definition time and reused on calls that omit items."
+    },
+    {
+      "id": "sliding-window",
+      "difficulty": "hard",
+      "question": "You must find the length of the longest substring without repeating characters in a string of 100,000 characters. Which approach is most appropriate?",
+      "options": [
+        "Generate all substrings",
+        "Sort the characters first",
+        "Sliding window with a hash map",
+        "Compare every pair of substrings"
+      ],
+      "answer": "Sliding window with a hash map",
+      "explanation": "A sliding window using last-seen positions achieves O(n) time under standard constant-time hash lookup assumptions."
+    }
   ]
 }
