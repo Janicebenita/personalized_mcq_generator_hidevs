@@ -1,4 +1,21 @@
-# BloomPath — Personalized MCQ Generator for Diagnostic Tests
+<div align="center">
+  <img
+    src="docs/assets/bloompath-hero.png"
+    alt="BloomPath — Source-Grounded Adaptive MCQ Practice"
+    width="100%"
+  />
+
+  <h1>BloomPath</h1>
+  <h3>Learn from evidence. Grow with every question.</h3>
+
+  <p>
+    Source-Grounded · On-Device AI · Adaptive Practice
+  </p>
+</div>
+
+_Project illustration above; actual application screenshots appear below._
+
+**Personalized MCQ Generator for Diagnostic Tests**
 
 Turn English study notes into source-grounded multiple-choice practice. BloomPath generates questions on the learner’s device, changes the next task after each response, and explains the evidence behind every answer and every adjustment.
 
