@@ -1,0 +1,23 @@
+[
+  {
+    "term": "Mitochondrion",
+    "definition": "the organelle that releases usable energy through cellular respiration",
+    "input": "generate question: <hl> Mitochondrion <hl> is the organelle that releases usable energy through cellular respiration. </s>",
+    "output": "What is the organelle that releases usable energy through cellular respiration?",
+    "ms": 238
+  },
+  {
+    "term": "List",
+    "definition": "a mutable ordered collection of items in Python",
+    "input": "generate question: <hl> List <hl> is a mutable ordered collection of items in Python. </s>",
+    "output": "What is a mutable ordered collection of items in Python?",
+    "ms": 182
+  },
+  {
+    "term": "Evaporation",
+    "definition": "the process that changes liquid water into water vapor by absorbing energy",
+    "input": "generate question: <hl> Evaporation <hl> is the process that changes liquid water into water vapor by absorbing energy. </s>",
+    "output": "What is the process that changes liquid water into water vapor by absorbing energy?",
+    "ms": 243
+  }
+]

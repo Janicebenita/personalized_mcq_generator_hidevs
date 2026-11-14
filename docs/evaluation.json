@@ -1,0 +1,802 @@
+{
+  "scope": "34 author-written definition facts across three subjects; deterministic greedy generation. Structural checks are not human semantic grading or evidence of exam validity.",
+  "runtime": "v26.0.0",
+  "model": "valhalla/t5-small-qg-hl, dynamic int8 ONNX",
+  "total": 34,
+  "accepted": 24,
+  "rejected": 10,
+  "distinctOptionsPassed": 34,
+  "answerInSourcePassed": 34,
+  "cases": [
+    {
+      "sample": "biology",
+      "term": "Nucleus",
+      "source": "Nucleus is the organelle that stores DNA and controls gene expression.",
+      "rawStem": "What is the organelle that stores DNA?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the organelle that stores DNA and controls gene expression”?",
+      "origin": "source",
+      "options": [
+        "Nucleus",
+        "Mitochondrion",
+        "Chloroplast",
+        "Vacuole"
+      ],
+      "answer": "Nucleus",
+      "ms": 147
+    },
+    {
+      "sample": "biology",
+      "term": "Mitochondrion",
+      "source": "Mitochondrion is the organelle that releases usable energy through cellular respiration.",
+      "rawStem": "What is the organelle that releases usable energy through cellular respiration?",
+      "accepted": true,
+      "finalStem": "What is the organelle that releases usable energy through cellular respiration?",
+      "origin": "ai",
+      "options": [
+        "Chloroplast",
+        "Mitochondrion",
+        "Lysosome",
+        "Nucleus"
+      ],
+      "answer": "Mitochondrion",
+      "ms": 188
+    },
+    {
+      "sample": "biology",
+      "term": "Ribosome",
+      "source": "Ribosome is the structure that assembles proteins using messenger RNA instructions.",
+      "rawStem": "What is the structure that assembles proteins using messenger RNA instructions?",
+      "accepted": true,
+      "finalStem": "What is the structure that assembles proteins using messenger RNA instructions?",
+      "origin": "ai",
+      "options": [
+        "Ribosome",
+        "Mitochondrion",
+        "Nucleus",
+        "Lysosome"
+      ],
+      "answer": "Ribosome",
+      "ms": 174
+    },
+    {
+      "sample": "biology",
+      "term": "Chloroplast",
+      "source": "Chloroplast is the organelle that captures light energy for photosynthesis in plant cells.",
+      "rawStem": "What is the organelle that captures light energy for photosynthesis in plant cells?",
+      "accepted": true,
+      "finalStem": "What is the organelle that captures light energy for photosynthesis in plant cells?",
+      "origin": "ai",
+      "options": [
+        "Nucleus",
+        "Lysosome",
+        "Mitochondrion",
+        "Chloroplast"
+      ],
+      "answer": "Chloroplast",
+      "ms": 200
+    },
+    {
+      "sample": "biology",
+      "term": "Vacuole",
+      "source": "Vacuole is the compartment that stores water and dissolved substances inside a cell.",
+      "rawStem": "What is the compartment that stores water and dissolves substances inside a cell?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the compartment that stores water and dissolved substances inside a cell”?",
+      "origin": "source",
+      "options": [
+        "Vacuole",
+        "Nucleus",
+        "Lysosome",
+        "Ribosome"
+      ],
+      "answer": "Vacuole",
+      "ms": 201
+    },
+    {
+      "sample": "biology",
+      "term": "Lysosome",
+      "source": "Lysosome is the organelle that breaks down worn-out cell components using digestive enzymes.",
+      "rawStem": "What is the organelle that breaks down worn-out cell components using digestive enzymes?",
+      "accepted": true,
+      "finalStem": "What is the organelle that breaks down worn-out cell components using digestive enzymes?",
+      "origin": "ai",
+      "options": [
+        "Nucleus",
+        "Ribosome",
+        "Lysosome",
+        "Mitochondrion"
+      ],
+      "answer": "Lysosome",
+      "ms": 302
+    },
+    {
+      "sample": "biology",
+      "term": "Cell membrane",
+      "source": "Cell membrane is the selectively permeable boundary that regulates movement into and out of cells.",
+      "rawStem": "What is the selectively permeable boundary that regulates movement into and out of cells?",
+      "accepted": true,
+      "finalStem": "What is the selectively permeable boundary that regulates movement into and out of cells?",
+      "origin": "ai",
+      "options": [
+        "Cell membrane",
+        "Cell wall",
+        "Plasmodesma",
+        "Cytoplasm"
+      ],
+      "answer": "Cell membrane",
+      "ms": 334
+    },
+    {
+      "sample": "biology",
+      "term": "Cell wall",
+      "source": "Cell wall is the rigid outer layer that supports and protects plant cells.",
+      "rawStem": "What is the rigid outer layer that supports plant cells?",
+      "accepted": true,
+      "finalStem": "What is the rigid outer layer that supports plant cells?",
+      "origin": "ai",
+      "options": [
+        "Cell membrane",
+        "Plasmodesma",
+        "Cell wall",
+        "Cytoplasm"
+      ],
+      "answer": "Cell wall",
+      "ms": 174
+    },
+    {
+      "sample": "biology",
+      "term": "Cytoplasm",
+      "source": "Cytoplasm is the gel-like material where many cell reactions take place.",
+      "rawStem": "What is the gel-like material where cell reactions occur?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the gel-like material where many cell reactions take place”?",
+      "origin": "source",
+      "options": [
+        "Cell wall",
+        "Cell membrane",
+        "Plasmodesma",
+        "Cytoplasm"
+      ],
+      "answer": "Cytoplasm",
+      "ms": 157
+    },
+    {
+      "sample": "biology",
+      "term": "Plasmodesma",
+      "source": "Plasmodesma is the channel that connects the cytoplasm of neighboring plant cells.",
+      "rawStem": "What is the channel that connects the cytoplasm of neighboring plant cells?",
+      "accepted": true,
+      "finalStem": "What is the channel that connects the cytoplasm of neighboring plant cells?",
+      "origin": "ai",
+      "options": [
+        "Plasmodesma",
+        "Cell wall",
+        "Cell membrane",
+        "Cytoplasm"
+      ],
+      "answer": "Plasmodesma",
+      "ms": 200
+    },
+    {
+      "sample": "python",
+      "term": "List",
+      "source": "List is a mutable ordered collection of items in Python.",
+      "rawStem": "What is a mutable ordered collection of items in Python?",
+      "accepted": true,
+      "finalStem": "What is a mutable ordered collection of items in Python?",
+      "origin": "ai",
+      "options": [
+        "Dictionary",
+        "List",
+        "Tuple",
+        "Set"
+      ],
+      "answer": "List",
+      "ms": 163
+    },
+    {
+      "sample": "python",
+      "term": "Tuple",
+      "source": "Tuple is an immutable ordered collection of items in Python.",
+      "rawStem": "What is a collection of items in Python?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “an immutable ordered collection of items in Python”?",
+      "origin": "source",
+      "options": [
+        "Dictionary",
+        "Tuple",
+        "List",
+        "Set"
+      ],
+      "answer": "Tuple",
+      "ms": 120
+    },
+    {
+      "sample": "python",
+      "term": "Set",
+      "source": "Set is an unordered collection of unique items in Python.",
+      "rawStem": "What is a collection of unique items in Python?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “an unordered collection of unique items in Python”?",
+      "origin": "source",
+      "options": [
+        "List",
+        "Dictionary",
+        "Set",
+        "Tuple"
+      ],
+      "answer": "Set",
+      "ms": 131
+    },
+    {
+      "sample": "python",
+      "term": "Dictionary",
+      "source": "Dictionary is a mutable mapping from unique keys to values in Python.",
+      "rawStem": "What is a mutable mapping from unique keys to values in Python?",
+      "accepted": true,
+      "finalStem": "What is a mutable mapping from unique keys to values in Python?",
+      "origin": "ai",
+      "options": [
+        "Dictionary",
+        "Set",
+        "Tuple",
+        "List"
+      ],
+      "answer": "Dictionary",
+      "ms": 189
+    },
+    {
+      "sample": "python",
+      "term": "For loop",
+      "source": "For loop is a control structure that iterates over the items of an iterable.",
+      "rawStem": "What is a control structure that iterates over the items of an iterable?",
+      "accepted": true,
+      "finalStem": "What is a control structure that iterates over the items of an iterable?",
+      "origin": "ai",
+      "options": [
+        "For loop",
+        "Continue statement",
+        "While loop",
+        "Break statement"
+      ],
+      "answer": "For loop",
+      "ms": 260
+    },
+    {
+      "sample": "python",
+      "term": "While loop",
+      "source": "While loop is a control structure that repeats while a condition remains true.",
+      "rawStem": "What is a control structure that repeats while a condition remains true?",
+      "accepted": true,
+      "finalStem": "What is a control structure that repeats while a condition remains true?",
+      "origin": "ai",
+      "options": [
+        "For loop",
+        "Continue statement",
+        "While loop",
+        "Break statement"
+      ],
+      "answer": "While loop",
+      "ms": 230
+    },
+    {
+      "sample": "python",
+      "term": "Break statement",
+      "source": "Break statement is the instruction that exits the nearest enclosing loop immediately.",
+      "rawStem": "What is the instruction that exits the nearest enclosing loop?",
+      "accepted": true,
+      "finalStem": "What is the instruction that exits the nearest enclosing loop?",
+      "origin": "ai",
+      "options": [
+        "Continue statement",
+        "For loop",
+        "While loop",
+        "Break statement"
+      ],
+      "answer": "Break statement",
+      "ms": 207
+    },
+    {
+      "sample": "python",
+      "term": "Continue statement",
+      "source": "Continue statement is the instruction that skips the rest of the current loop iteration.",
+      "rawStem": "What is the instruction that skips the rest of the current loop iteration?",
+      "accepted": true,
+      "finalStem": "What is the instruction that skips the rest of the current loop iteration?",
+      "origin": "ai",
+      "options": [
+        "Break statement",
+        "While loop",
+        "Continue statement",
+        "For loop"
+      ],
+      "answer": "Continue statement",
+      "ms": 210
+    },
+    {
+      "sample": "python",
+      "term": "Parameter",
+      "source": "Parameter is a named placeholder in a function definition.",
+      "rawStem": "What is a placeholder in a function definition?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “a named placeholder in a function definition”?",
+      "origin": "source",
+      "options": [
+        "Parameter",
+        "Argument",
+        "Return statement",
+        "Lambda expression"
+      ],
+      "answer": "Parameter",
+      "ms": 152
+    },
+    {
+      "sample": "python",
+      "term": "Argument",
+      "source": "Argument is a value passed to a function when it is called.",
+      "rawStem": "What is a value passed to a function when it is called?",
+      "accepted": true,
+      "finalStem": "What is a value passed to a function when it is called?",
+      "origin": "ai",
+      "options": [
+        "Argument",
+        "Parameter",
+        "Return statement",
+        "Lambda expression"
+      ],
+      "answer": "Argument",
+      "ms": 181
+    },
+    {
+      "sample": "python",
+      "term": "Return statement",
+      "source": "Return statement is the instruction that sends a result back to a function caller.",
+      "rawStem": "What is the instruction that sends a result back to a function caller?",
+      "accepted": true,
+      "finalStem": "What is the instruction that sends a result back to a function caller?",
+      "origin": "ai",
+      "options": [
+        "Argument",
+        "Parameter",
+        "Return statement",
+        "Lambda expression"
+      ],
+      "answer": "Return statement",
+      "ms": 195
+    },
+    {
+      "sample": "python",
+      "term": "Lambda expression",
+      "source": "Lambda expression is the expression that creates a small anonymous function.",
+      "rawStem": "What is the name of the expression that creates a small anonymous function?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the expression that creates a small anonymous function”?",
+      "origin": "source",
+      "options": [
+        "Lambda expression",
+        "Argument",
+        "Parameter",
+        "Return statement"
+      ],
+      "answer": "Lambda expression",
+      "ms": 226
+    },
+    {
+      "sample": "earth",
+      "term": "Evaporation",
+      "source": "Evaporation is the process that changes liquid water into water vapor by absorbing energy.",
+      "rawStem": "What is the process that changes liquid water into water vapor by absorbing energy?",
+      "accepted": true,
+      "finalStem": "What is the process that changes liquid water into water vapor by absorbing energy?",
+      "origin": "ai",
+      "options": [
+        "Infiltration",
+        "Condensation",
+        "Evaporation",
+        "Transpiration"
+      ],
+      "answer": "Evaporation",
+      "ms": 206
+    },
+    {
+      "sample": "earth",
+      "term": "Condensation",
+      "source": "Condensation is the process that changes water vapor into liquid droplets by releasing energy.",
+      "rawStem": "What is the process that changes water vapor into liquid droplets?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the process that changes water vapor into liquid droplets by releasing energy”?",
+      "origin": "source",
+      "options": [
+        "Condensation",
+        "Evaporation",
+        "Infiltration",
+        "Transpiration"
+      ],
+      "answer": "Condensation",
+      "ms": 183
+    },
+    {
+      "sample": "earth",
+      "term": "Precipitation",
+      "source": "Precipitation is the falling of water from clouds as rain, snow, sleet, or hail.",
+      "rawStem": "What is the fall of water from clouds?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the falling of water from clouds as rain, snow, sleet, or hail”?",
+      "origin": "source",
+      "options": [
+        "Transpiration",
+        "Runoff",
+        "Precipitation",
+        "Infiltration"
+      ],
+      "answer": "Precipitation",
+      "ms": 150
+    },
+    {
+      "sample": "earth",
+      "term": "Transpiration",
+      "source": "Transpiration is the release of water vapor from plant leaves.",
+      "rawStem": "What is the release of water from plant leaves?",
+      "accepted": true,
+      "finalStem": "What is the release of water from plant leaves?",
+      "origin": "ai",
+      "options": [
+        "Precipitation",
+        "Runoff",
+        "Infiltration",
+        "Transpiration"
+      ],
+      "answer": "Transpiration",
+      "ms": 197
+    },
+    {
+      "sample": "earth",
+      "term": "Infiltration",
+      "source": "Infiltration is the movement of surface water into soil.",
+      "rawStem": "What is the movement of surface water into soil?",
+      "accepted": true,
+      "finalStem": "What is the movement of surface water into soil?",
+      "origin": "ai",
+      "options": [
+        "Infiltration",
+        "Evaporation",
+        "Transpiration",
+        "Runoff"
+      ],
+      "answer": "Infiltration",
+      "ms": 171
+    },
+    {
+      "sample": "earth",
+      "term": "Runoff",
+      "source": "Runoff is the flow of water over the land surface toward streams and rivers.",
+      "rawStem": "What is the flow of water over the land surface toward streams and rivers?",
+      "accepted": true,
+      "finalStem": "What is the flow of water over the land surface toward streams and rivers?",
+      "origin": "ai",
+      "options": [
+        "Infiltration",
+        "Transpiration",
+        "Precipitation",
+        "Runoff"
+      ],
+      "answer": "Runoff",
+      "ms": 215
+    },
+    {
+      "sample": "earth",
+      "term": "Weathering",
+      "source": "Weathering is the breakdown of rocks at Earth’s surface without transporting the fragments.",
+      "rawStem": "What is the breakdown of rocks at Earth’s surface?",
+      "accepted": false,
+      "finalStem": "Which term matches this description: “the breakdown of rocks at Earth’s surface without transporting the fragments”?",
+      "origin": "source",
+      "options": [
+        "Metamorphism",
+        "Compaction",
+        "Erosion",
+        "Weathering"
+      ],
+      "answer": "Weathering",
+      "ms": 183
+    },
+    {
+      "sample": "earth",
+      "term": "Erosion",
+      "source": "Erosion is the transport of rock fragments by water, wind, ice, or gravity.",
+      "rawStem": "What is the transport of rock fragments by water, wind, ice, or gravity?",
+      "accepted": true,
+      "finalStem": "What is the transport of rock fragments by water, wind, ice, or gravity?",
+      "origin": "ai",
+      "options": [
+        "Erosion",
+        "Cementation",
+        "Metamorphism",
+        "Weathering"
+      ],
+      "answer": "Erosion",
+      "ms": 259
+    },
+    {
+      "sample": "earth",
+      "term": "Deposition",
+      "source": "Deposition is the settling of transported sediment in a new location.",
+      "rawStem": "What is the settling of transported sediment in a new location?",
+      "accepted": true,
+      "finalStem": "What is the settling of transported sediment in a new location?",
+      "origin": "ai",
+      "options": [
+        "Compaction",
+        "Metamorphism",
+        "Deposition",
+        "Cementation"
+      ],
+      "answer": "Deposition",
+      "ms": 177
+    },
+    {
+      "sample": "earth",
+      "term": "Compaction",
+      "source": "Compaction is the compression of sediment layers under the weight of overlying material.",
+      "rawStem": "What is the compression of sediment layers under the weight of overlying material?",
+      "accepted": true,
+      "finalStem": "What is the compression of sediment layers under the weight of overlying material?",
+      "origin": "ai",
+      "options": [
+        "Metamorphism",
+        "Compaction",
+        "Deposition",
+        "Cementation"
+      ],
+      "answer": "Compaction",
+      "ms": 219
+    },
+    {
+      "sample": "earth",
+      "term": "Cementation",
+      "source": "Cementation is the binding of sediment grains by minerals deposited between them.",
+      "rawStem": "What is the binding of sediment grains by minerals deposited between them?",
+      "accepted": true,
+      "finalStem": "What is the binding of sediment grains by minerals deposited between them?",
+      "origin": "ai",
+      "options": [
+        "Deposition",
+        "Metamorphism",
+        "Compaction",
+        "Cementation"
+      ],
+      "answer": "Cementation",
+      "ms": 207
+    },
+    {
+      "sample": "earth",
+      "term": "Metamorphism",
+      "source": "Metamorphism is the alteration of existing rock by heat and pressure without melting.",
+      "rawStem": "What is the alteration of existing rock by heat and pressure without melting?",
+      "accepted": true,
+      "finalStem": "What is the alteration of existing rock by heat and pressure without melting?",
+      "origin": "ai",
+      "options": [
+        "Metamorphism",
+        "Cementation",
+        "Erosion",
+        "Weathering"
+      ],
+      "answer": "Metamorphism",
+      "ms": 219
+    }
+  ],
+  "paths": [
+    {
+      "sample": "biology",
+      "profile": "all-correct",
+      "levels": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "concepts": [
+        "7b5xgz",
+        "70lwth",
+        "6np78g",
+        "1wo6y7t",
+        "11lk7vm",
+        "dwtdak",
+        "tr9rvr",
+        "wda1xt"
+      ],
+      "accuracy": 100,
+      "reasons": [
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers in a row raise the next question by one level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level."
+      ]
+    },
+    {
+      "sample": "biology",
+      "profile": "needs-support",
+      "levels": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "concepts": [
+        "7b5xgz",
+        "15buhb6",
+        "11lk7vm",
+        "14ns01q",
+        "tr9rvr",
+        "6np78g",
+        "70lwth",
+        "1wo6y7t"
+      ],
+      "accuracy": 25,
+      "reasons": [
+        "A missed answer lowers the next question by one level.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation."
+      ]
+    },
+    {
+      "sample": "python",
+      "profile": "all-correct",
+      "levels": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "concepts": [
+        "8yellw",
+        "1veryqb",
+        "14kg7g7",
+        "il8wsl",
+        "1245ynm",
+        "1gp4xcr",
+        "11hf9om",
+        "19bi5xw"
+      ],
+      "accuracy": 100,
+      "reasons": [
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers in a row raise the next question by one level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level."
+      ]
+    },
+    {
+      "sample": "python",
+      "profile": "needs-support",
+      "levels": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "concepts": [
+        "8yellw",
+        "1gp4xcr",
+        "m338t8",
+        "11hf9om",
+        "14kg7g7",
+        "178fimv",
+        "1veryqb",
+        "19bi5xw"
+      ],
+      "accuracy": 25,
+      "reasons": [
+        "A missed answer lowers the next question by one level.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation."
+      ]
+    },
+    {
+      "sample": "earth",
+      "profile": "all-correct",
+      "levels": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "concepts": [
+        "58yfs7",
+        "kyu7l2",
+        "9gfmuv",
+        "1j7yx2h",
+        "dyrg8d",
+        "jzv6xn",
+        "64o21f",
+        "12hnxsx"
+      ],
+      "accuracy": 100,
+      "reasons": [
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers in a row raise the next question by one level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Two correct answers; stay at the highest practice level."
+      ]
+    },
+    {
+      "sample": "earth",
+      "profile": "needs-support",
+      "levels": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "concepts": [
+        "58yfs7",
+        "9gfmuv",
+        "1mmutun",
+        "zeotqn",
+        "jzv6xn",
+        "64o21f",
+        "1lgduik",
+        "dyrg8d"
+      ],
+      "accuracy": 25,
+      "reasons": [
+        "A missed answer lowers the next question by one level.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation.",
+        "One correct answer; keep this level to confirm understanding.",
+        "Stay at Recall to rebuild the foundation.",
+        "Stay at Recall to rebuild the foundation."
+      ]
+    }
+  ]
+}

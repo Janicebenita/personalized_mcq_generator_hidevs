@@ -1,0 +1,48 @@
+{
+  "source": "valhalla/t5-small-qg-hl",
+  "revision": "9fdee3255929ba5f0b9d45e76e1e0184f664a368",
+  "license": "MIT",
+  "export": "optimum-onnx 0.1.0; opset17; dynamic int8 MatMul",
+  "files": [
+    {
+      "path": "added_tokens.json",
+      "bytes": 42,
+      "sha256": "b9edfbab82b1ba0c0758fca3e6fafb8b730a4b654dd947509e4b3e9a029d82f3"
+    },
+    {
+      "path": "config.json",
+      "bytes": 925,
+      "sha256": "9e8b6a3efc2ca9a622b391238f8bc38259f6af79d10705250eb4d9fa9cf3e7d0"
+    },
+    {
+      "path": "generation_config.json",
+      "bytes": 149,
+      "sha256": "34f49d5043dafc40ac0f60a26f3ba19690bd2f2f4ea4957bdafa51d05feee63e"
+    },
+    {
+      "path": "special_tokens_map.json",
+      "bytes": 2668,
+      "sha256": "65d84a9271d68f1230ab99518c00f0f7eaef95c7b363001595ba6fa662d434b1"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 2424596,
+      "sha256": "5ed363d09c00323612f51f31465c489cb8d0fe138d53e9661f57bc0f39761063"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 22146,
+      "sha256": "f5b8c48441321fff3303f44650283db48aaa2b4b2335d2f0b4732beaf62e2209"
+    },
+    {
+      "path": "onnx/decoder_model_merged_quantized.onnx",
+      "bytes": 58727898,
+      "sha256": "731a76dd3158fae27e8b7fb5696a2fb6b4f0416f8127dc2bdc20697b4d88cf52"
+    },
+    {
+      "path": "onnx/encoder_model_quantized.onnx",
+      "bytes": 35502037,
+      "sha256": "060294ffd81df7a43f91b2f15f94e8dd2af387c30d2defaaa188fd415ae0e35b"
+    }
+  ]
+}

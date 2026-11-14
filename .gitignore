@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.vercel/
+.env*
+!.env.example
+.cache/
+*.log
+docs/demo/*.mp4
+.model-venv/
+public/models/
