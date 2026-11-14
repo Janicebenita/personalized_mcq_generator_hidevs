@@ -84,7 +84,7 @@ The demo uses actual browser screenshots from synthetic practice sessions with s
 | 📊 **Understand your results**           | Shows topic accuracy, question counts, confidence, answer time, and difficulty changes                           |
 | 📤 **Keep your learning record**         | Exports session results as JSON or CSV; notes and responses stay in the tab’s memory                             |
 
-## 🖼️ Inside the app
+## 📸 Inside the app
 
 <table>
 <tr>
