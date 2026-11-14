@@ -86,4 +86,3 @@ export function analytics(responses:Response[]){
  return {total,correct,accuracy:total?Math.round(100*correct/total):0,topics,seconds:Math.round(responses.reduce((n,r)=>n+r.seconds,0)),confidentMisses:responses.filter(r=>r.confidence==='Sure'&&!r.correct).length,interval:total?[Math.round(100*(center-margin)),Math.round(100*(center+margin))]:[0,100]};
 }
 export function toCSV(responses:Response[]){const cell=(x:unknown)=>`"${String(x).replace(/"/g,'""').replace(/^[=+@\-\t\r]/,"'$&")}"`;return [['Topic','Level','Question','Selected','Answer','Correct','Confidence','Seconds','Next level','Reason'],...responses.map(r=>[r.item.topic,r.before,r.item.stem,r.selected,r.item.answer,r.correct,r.confidence,Math.round(r.seconds),r.after,r.reason])].map(row=>row.map(cell).join(',')).join('\r\n');}
-

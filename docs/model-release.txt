@@ -1,0 +1,1 @@
+Browser-ready model assets for BloomPath. Converted from valhalla/t5-small-qg-hl revision 9fdee3255929ba5f0b9d45e76e1e0184f664a368 with Optimum, then dynamically quantized for MatMul and Gather including subgraphs. Source model card lists MIT. See docs/model-manifest.json for SHA-256 checksums and docs/THIRD_PARTY.md for provenance. These are model weights, not learner data.
