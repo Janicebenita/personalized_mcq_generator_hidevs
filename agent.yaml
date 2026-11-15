@@ -1,0 +1,6 @@
+spec_version: "0.1.0"
+name: bloompath
+description: >-
+  Source-grounded adaptive MCQ practice agent that turns English definition
+  notes into inspectable multiple-choice questions and guides learners through
+  Recall, Connect, and Challenge tasks using observed session responses.
